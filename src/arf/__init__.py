@@ -10,4 +10,4 @@ on. A module enters this package only once it reproduces the results of those
 releases exactly; ``docs/ARCHITECTURE.md`` lists what has been ported.
 """
 
-__version__ = "2.0.0.dev9"
+__version__ = "2.0.0.dev10"

@@ -24,6 +24,8 @@ import pandas as pd
 from arf.cloud import LatentCloudField, correlated_cloud_mask, independent_cloud_mask
 from arf.events import EventTable
 from arf.grid import cell_centres
+from arf.report.onsets import OnsetSettings
+from arf.runs import orbit_period_min
 
 #: Largest relative difference of a floating-point value still counted as rounding, by default.
 DEFAULT_ROUNDING = 1e-12
@@ -128,6 +130,27 @@ def run_cloud(events: EventTable, settings: dict) -> np.ndarray:
     if settings["cloud_model"] == "iid":
         return independent_cloud_mask(events, probability, seed)
     raise ValueError(f"cloud model {settings['cloud_model']!r} is not one of the registered releases'")
+
+
+def onset_settings(run_folder: Path, events: EventTable, settings: dict) -> OnsetSettings:
+    """The settings of Cell 7C's selectors for a run, from its manifest and Cell 2's orbital period."""
+    return OnsetSettings(
+        orbit_period_min=orbit_period_min(run_folder),
+        cloud_probability=np.full(len(events.region_cells), float(settings["cloud_probability"])),
+        budget=int(settings["max_selection_steps"]),
+        decay_rate=settings["latency_decay_rate"],
+        decay_scale=settings["latency_decay_scale"],
+        window_hours=int(settings["window_hours"]),
+        shift_hours=int(settings["onset_shift_hours"]),
+        shift_step_min=int(settings["onset_shift_step_min"]),
+        coverage_targets_pct=tuple(settings["coverage_targets_pct"]),
+        reachable_level_pct=float(settings["h1_reachable_coverage_pct"]),
+        random_draws=int(settings["random_baseline_draws"]),
+        seed=int(settings["random_seed"]),
+        cloud_knowledge=settings["cloud_knowledge"],
+        cloud_planning=settings["cloud_planning"],
+        time_objective=settings["time_aware_objective"],
+    )
 
 
 def numpy_of(manifest: dict) -> str:

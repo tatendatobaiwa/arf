@@ -36,6 +36,13 @@ RELEASE_DEFAULTS = {
     "cloud_sweep_lengths_km": [0.0, 10.0, 25.0, 50.0, 100.0, 200.0],
     "cloud_sweep_times_h": [1.0, 3.0, 6.0, 24.0],
     "cloud_sweep_seeds": 10,
+    "decay_sweep": [0.5, 1.0, 2.0, 3.0, 5.0],
+    "ilp_enabled": True,
+    "ilp_instances": 5,
+    "ilp_horizon_hours": 6,
+    "ilp_budget_k": 10,
+    "ilp_time_limit_s": 120.0,
+    "ilp_max_pairs": 100000,
 }
 
 
