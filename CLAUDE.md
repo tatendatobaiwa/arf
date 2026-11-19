@@ -14,5 +14,6 @@
 
 ## Never edit
 
-`pipeline/`, `analyses/`, `protocol/` and `manuscript_tools/` hold the registered releases; their files are SHA-256
-pinned. Do not edit or reformat them.
+`pipeline/`, `analyses/`, `protocol/` and `manuscript_tools/` hold the registered releases. The protocol records
+the SHA-256 of the 1.5.3 and 1.5.6 pipelines, which `tests/test_repository.py` checks; `SHA256SUMS.txt` is the file
+list of release 1.5.3 (see `docs/PROVENANCE.md`). Do not edit or reformat any of them.

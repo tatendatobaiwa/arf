@@ -49,13 +49,14 @@ from arf.checking import (
     compare_tables,
     folders_from,
     numpy_of,
+    onset_settings,
     run_cloud,
     verdict_of,
 )
 from arf.events import EventTable
 from arf.grid import region_cells_from_run_folder
-from arf.report import OnsetSettings, onset_summary, onset_table
-from arf.runs import find_run_folder, orbit_period_min, read_csv_exact, read_manifest, run_settings
+from arf.report import onset_summary, onset_table
+from arf.runs import find_run_folder, read_csv_exact, read_manifest, run_settings
 
 NEEDED = (
     "arf_cell2_summary.json",
@@ -79,23 +80,7 @@ def compute(run_folder: Path, settings: dict):
     """Release 2's onset table and summary for a run."""
     events = EventTable.from_run_folder(run_folder)
     cell2 = json.loads((run_folder / "arf_cell2_summary.json").read_text())
-    options = OnsetSettings(
-        orbit_period_min=orbit_period_min(run_folder),
-        cloud_probability=np.full(len(events.region_cells), float(settings["cloud_probability"])),
-        budget=int(settings["max_selection_steps"]),
-        decay_rate=settings["latency_decay_rate"],
-        decay_scale=settings["latency_decay_scale"],
-        window_hours=int(settings["window_hours"]),
-        shift_hours=int(settings["onset_shift_hours"]),
-        shift_step_min=int(settings["onset_shift_step_min"]),
-        coverage_targets_pct=tuple(settings["coverage_targets_pct"]),
-        reachable_level_pct=float(settings["h1_reachable_coverage_pct"]),
-        random_draws=int(settings["random_baseline_draws"]),
-        seed=int(settings["random_seed"]),
-        cloud_knowledge=settings["cloud_knowledge"],
-        cloud_planning=settings["cloud_planning"],
-        time_objective=settings["time_aware_objective"],
-    )
+    options = onset_settings(run_folder, events, settings)
     table = onset_table(events, run_cloud(events, settings), options)
     summary = onset_summary(
         table,

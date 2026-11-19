@@ -724,3 +724,59 @@ def run_cell7c_cloud(
     cloud = source_between(release, "cloud_seed_rows, cloud_robustness_summary = [], {}", "    # Figure 8 (IEEE")
     exec(compile(cloud, str(RELEASES[release]), "exec"), namespace)
     return namespace
+
+
+def run_cell7c_policies(
+    release: str,
+    refined_events: pd.DataFrame,
+    region_cells,
+    out_dir,
+    *,
+    decay_sweep: tuple = (0.5, 1.0, 2.0, 3.0, 5.0),
+    **settings,
+) -> dict:
+    """Execute Cell 6 up to its first selection, and section 1 of Cell 7C, of a registered release.
+
+    After Cell 7C's helpers, the decay sweep, the policy comparison and the cost-latency frontier run unchanged up to
+    Figure 6, writing ``arf_decay_sweep.csv``, ``arf_policy_comparison.csv`` and ``arf_cost_latency_frontier.csv``
+    to ``out_dir``. Returns the namespace: ``decay_sweep_df``, ``policy_df`` and ``frontier_df`` among others.
+    """
+    namespace = _cell7c_namespace(
+        release, refined_events, region_cells, out_dir, extra={"DECAY_SWEEP": tuple(decay_sweep)}, **settings
+    )
+    section = source_between(release, "_sweep_rates = [0.0]", "# v1.5.2: two IEEE columns wide (7.16 in)")
+    exec(compile(section, str(RELEASES[release]), "exec"), namespace)
+    return namespace
+
+
+def run_cell7c_ilp(
+    release: str,
+    refined_events: pd.DataFrame,
+    region_cells,
+    out_dir,
+    *,
+    ilp_enabled: bool = True,
+    ilp_instances: int = 5,
+    ilp_horizon_hours: int = 6,
+    ilp_budget_k: int = 10,
+    ilp_time_limit_s: float = 120.0,
+    ilp_max_pairs: int = 100_000,
+    **settings,
+) -> dict:
+    """Execute Cell 6 up to its first selection, and section 3 of Cell 7C (the optimality gap), of a registered release.
+
+    Unchanged; it writes ``arf_ilp_gap.csv`` to ``out_dir``. Returns the namespace: ``ilp_df`` and ``ilp_summary``
+    among others.
+    """
+    extra = {
+        "ILP_ENABLED": ilp_enabled,
+        "ILP_INSTANCES": ilp_instances,
+        "ILP_HORIZON_HOURS": ilp_horizon_hours,
+        "ILP_BUDGET_K": ilp_budget_k,
+        "ILP_TIME_LIMIT_S": ilp_time_limit_s,
+        "ILP_MAX_PAIRS": ilp_max_pairs,
+    }
+    namespace = _cell7c_namespace(release, refined_events, region_cells, out_dir, extra=extra, **settings)
+    section = source_between(release, "ilp_rows, ilp_summary = [], {}", "# 4. CLOUD ROBUSTNESS OVER CLOUD REALISATIONS")
+    exec(compile(section, str(RELEASES[release]), "exec"), namespace)
+    return namespace
