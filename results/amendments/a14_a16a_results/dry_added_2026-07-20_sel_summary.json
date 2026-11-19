@@ -1,0 +1,57 @@
+{
+ "run_dir": "2026-07-20",
+ "onsets": 73,
+ "margin_min": 94.17880325967091,
+ "k": 30,
+ "identity_check": "passed",
+ "methods": {
+  "ecc": {
+   "reached_level_pct": 100.0,
+   "within_margin_of_floor_pct": 100.0,
+   "time_h_median": 12.766666666666667,
+   "images_mean": 11.726027397260275,
+   "images_median": 12.0
+  },
+  "wang26": {
+   "reached_level_pct": 100.0,
+   "within_margin_of_floor_pct": 100.0,
+   "time_h_median": 12.766666666666667,
+   "images_mean": 17.410958904109588,
+   "images_median": 18.0,
+   "coverage_pct_median": 98.04737975592246,
+   "ecc_fewer_images_pct": 100.0,
+   "ecc_not_later_pct": 100.0
+  },
+  "wang26_full": {
+   "reached_level_pct": 100.0,
+   "within_margin_of_floor_pct": 100.0,
+   "time_h_median": 12.766666666666667,
+   "images_mean": 19.465753424657535,
+   "images_median": 19.0,
+   "coverage_pct_median": 100.0,
+   "ecc_fewer_images_pct": 100.0,
+   "ecc_not_later_pct": 100.0
+  },
+  "ks17": {
+   "reached_level_pct": 100.0,
+   "within_margin_of_floor_pct": 100.0,
+   "time_h_median": 12.766666666666667,
+   "images_mean": 20.21917808219178,
+   "images_median": 21.0,
+   "coverage_pct_median": 100.0,
+   "ecc_fewer_images_pct": 100.0,
+   "ecc_not_later_pct": 100.0
+  },
+  "pan24": {
+   "reached_level_pct": 100.0,
+   "within_margin_of_floor_pct": 100.0,
+   "time_h_median": 12.766666666666667,
+   "images_mean": 11.835616438356164,
+   "images_median": 12.0,
+   "coverage_pct_median": 95.678391959799,
+   "ecc_fewer_images_pct": 4.10958904109589,
+   "ecc_not_later_pct": 100.0
+  }
+ },
+ "fcfs_images_mean": 19.89041095890411
+}

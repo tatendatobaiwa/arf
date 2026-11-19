@@ -1,0 +1,13 @@
+6 runs (5 flagged + 1 control)
+ARF_Outputs_ckgr_okavango_earth-resources_from20260921: run finished 2026-10-26T21:46:58 UTC
+    orekit-data 9de5188d8410 of 2026-10-23T19:17:29+00:00: IDENTICAL
+ARF_Outputs_ckgr_okavango_earth-resources_from20260921_without-SENTINEL2A: run finished 2026-10-26T23:53:51 UTC
+    orekit-data 9de5188d8410 of 2026-10-23T19:17:29+00:00: IDENTICAL
+ARF_Outputs_ckgr_okavango_earth-resources_planet-conservative_from20260921: run finished 2026-10-26T19:05:23 UTC
+    orekit-data 9de5188d8410 of 2026-10-23T19:17:29+00:00: IDENTICAL
+ARF_Outputs_ckgr_okavango_earth-resources_planet-conservative_from20260921_without-SENTINEL2A: run finished 2026-10-26T23:50:55 UTC
+    orekit-data 9de5188d8410 of 2026-10-23T19:17:29+00:00: IDENTICAL
+ARF_Outputs_ckgr_okavango_earth-resources_planet-optimistic_from20260921: run finished 2026-10-26T21:44:07 UTC
+    orekit-data 9de5188d8410 of 2026-10-23T19:17:29+00:00: IDENTICAL
+ARF_Outputs_ckgr_okavango_earth-resources_planet-conservative_from20260831: run finished 2026-10-26T18:48:39 UTC
+    orekit-data 9de5188d8410 of 2026-10-23T19:17:29+00:00: IDENTICAL

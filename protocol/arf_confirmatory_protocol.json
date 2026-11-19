@@ -1,0 +1,916 @@
+{
+ "id": "ARF-confirmatory-2026-10",
+ "frozen_utc": "2026-10-12T19:57:45Z",
+ "release": "1.5.3",
+ "pipeline_file": "algorithmic_reconstruction_framework.py",
+ "pipeline_sha256": "14426c89c916ffcaac032cb94ec186ef7a7f8011748044c99f2386585d917950",
+ "status_when_frozen": "No window listed here had been run or analysed. All hypotheses, thresholds and decision rules below were fixed from the exploratory replay of the 15 runs of 12 October 2026 (single 48-h window, live orbital elements), which is reported separately as exploratory.",
+ "windows": [
+  "2026-08-03T00:00:00",
+  "2026-08-10T00:00:00",
+  "2026-08-17T00:00:00",
+  "2026-08-24T00:00:00",
+  "2026-08-31T00:00:00",
+  "2026-09-07T00:00:00",
+  "2026-09-14T00:00:00",
+  "2026-09-21T00:00:00"
+ ],
+ "window_hours": 48,
+ "unit_of_analysis": "analysis window (one 48-h window per run); onsets and cloud realisations are nested within it",
+ "designs": [
+  {
+   "role": "primary",
+   "active_roi": "ckgr_okavango",
+   "fleet": "earth-resources+planet",
+   "planet_swath_case": "conservative"
+  },
+  {
+   "role": "secondary",
+   "active_roi": "ckgr_okavango",
+   "fleet": "earth-resources+planet",
+   "planet_swath_case": "optimistic"
+  },
+  {
+   "role": "secondary",
+   "active_roi": "ckgr_okavango",
+   "fleet": "earth-resources",
+   "planet_swath_case": "conservative"
+  },
+  {
+   "role": "secondary",
+   "active_roi": "lower_zambezi",
+   "fleet": "earth-resources+planet",
+   "planet_swath_case": "conservative"
+  },
+  {
+   "role": "secondary",
+   "active_roi": "karoo_nature_reserve",
+   "fleet": "earth-resources+planet",
+   "planet_swath_case": "conservative"
+  },
+  {
+   "role": "exploratory",
+   "active_roi": "ckgr_okavango",
+   "fleet": "earth-resources+planet",
+   "planet_swath_case": "conservative",
+   "exclude_satellites": [
+    "SENTINEL-2A"
+   ]
+  },
+  {
+   "role": "exploratory",
+   "active_roi": "ckgr_okavango",
+   "fleet": "earth-resources",
+   "planet_swath_case": "conservative",
+   "exclude_satellites": [
+    "SENTINEL-2A"
+   ]
+  }
+ ],
+ "settings": {
+  "max_selection_steps": 30,
+  "cloud_probability": 0.35,
+  "cloud_probability_source": "constant",
+  "cloud_model": "correlated",
+  "cloud_corr_length_km": 50.0,
+  "cloud_corr_time_h": 3.0,
+  "cloud_planning": "expected",
+  "cloud_seeds": 20,
+  "random_seed": 42,
+  "time_aware_objective": "facility",
+  "latency_decay_rate": 3.0,
+  "latency_decay_scale": "fleet",
+  "h1_reachable_coverage_pct": 95.0,
+  "h1_floor_margin": "one orbital period at the fleet's median altitude",
+  "onset_shift_hours": 24,
+  "onset_shift_step_min": 20,
+  "all_other_settings": "release defaults (Cell 0)"
+ },
+ "primary_hypotheses": [
+  "H1a",
+  "H1b",
+  "H2"
+ ],
+ "hypotheses": {
+  "H1a": "Latency non-inferiority of the earliest-completion cover (ECC, k = 30): in a window, the share of evaluable onsets at which ECC reaches 95% of the tiles reachable in the onset's 24-h horizon no later than one orbital period after the physical floor (clear sky). Claim: the mean of this share over windows is at least 90%.",
+  "H1b": "Image economy of ECC: in a window, the share of eligible onsets (first-come-first-served needs two or more images to reach the level) at which ECC meets the H1a criterion with fewer images than first-come-first-served. Claim: the mean of this share over windows is at least 90%.",
+  "H2": "Value of acting on cloud observations: in a window, the mean over 20 cloud realisations (correlated model, L = 50 km, T = 3 h, p = 0.35) of the coverage difference, adaptive selector minus the same planner run in advance without observations, both with the same number of images (time-aware objective). Claim: the mean of this difference over windows is above 0."
+ },
+ "evaluability": {
+  "min_evaluable_onsets": 29,
+  "rule_onsets": "a window counts for H1a/H1b only with at least 29 evaluated (resp. eligible) onsets",
+  "rule_h2": "a window counts for H2 only when H2 is evaluable in it (the selector adapted at least once and the greedy given the cloud beats the open-loop plan in some realisation)",
+  "min_windows": 5
+ },
+ "min_evaluable_onsets": 29,
+ "min_windows": 5,
+ "threshold_pct": 90.0,
+ "alpha": 0.05,
+ "decision_rules": {
+  "H1a_H1b": "SUPPORTED if the one-sided (1 - alpha') Student-t lower confidence bound of the mean over evaluable windows is >= 90%; NOT SUPPORTED otherwise; NOT EVALUABLE with fewer than 5 evaluable windows",
+  "H2": "SUPPORTED if the one-sided (1 - alpha') Student-t lower confidence bound of the mean over evaluable windows is > 0 coverage points; NOT SUPPORTED otherwise; NOT EVALUABLE with fewer than 5 evaluable windows",
+  "alpha_prime": "alpha / 3 (Bonferroni over the three primary hypotheses) for the primary design; alpha for secondary designs, which are exploratory"
+ },
+ "reported_not_tested": [
+  "H3 (redundancy at 95% coverage) per window",
+  "mosaic quality at the level",
+  "cloud-scale sensitivity sweep",
+  "Sentinel-2 / Landsat archive validation (Cell 7D)",
+  "the time-aware selector's H1a share",
+  "coverage-first H2"
+ ],
+ "deviations_policy": "Any change to code, settings, windows or rules after freezing is reported as a deviation with its reason; results under the frozen plan are reported regardless.",
+ "analysis_script": "arf_confirmatory_analysis.py",
+ "runner": "arf_batch_runner.py (PRIMARY then SECONDARY lists)",
+ "amended_utc": "2026-11-15T21:12:59Z",
+ "amendments": [
+  {
+   "id": "A1",
+   "date_utc": "2026-10-14T19:12:49Z",
+   "status_when_amended": "No window listed in this protocol had been run or analysed: the batch (arf_batch_runner.py) had not been started. Decided before any confirmatory data existed.",
+   "release_before": "1.5.0",
+   "pipeline_sha256_before": "43aa151ceb9febe62bc6c2badb93b20d4d4156d445d1a260c53c5d7be5f8477f",
+   "release_after": "1.5.2",
+   "pipeline_sha256_after": "22896e4f1e834e355fa97bcd25cb6f1ccef48a1491ab7f7189f47774d882c313",
+   "reason": "Per-cell audit of the pipeline before the confirmatory runs (14 October 2026). Release 1.5.2 corrects defects found in 1.5.0 and 1.5.1 and is the release the confirmatory runs will use; arf_confirmatory_analysis.py excludes runs of any other release.",
+   "unchanged": "hypotheses H1a, H1b, H2; thresholds; windows; evaluability rules; decision rules; alpha and the Bonferroni adjustment; the primary and secondary designs; all settings",
+   "changes_that_can_affect_window_outcomes": [
+    "Cell 5 (1.5.1): each tile observation belongs to the one-minute strip that contains its closest approach. Up to 1.5.0 every strip also claimed an end cap beyond each end, so most Sentinel-2 observations appeared in two consecutive strips (12 October 2026, primary design: 12,110 of 50,075 rows, 24.2%, removed; in the optimistic-swath run, 12,911 of 57,467: every removed row has a twin in the adjacent strip of the same pass and no pass loses a tile; checked with real Orekit and an independent SGP4 propagation). Coverage and floor times change by at most one strip minute; image counts (H1b), quality and the candidate-event set can change.",
+    "Cell 6 (1.5.1): time-aware weights on delivery time instead of pass time (identical when every downlink wait is 0, as in all modelled runs) and floored at 1e-300 (only matters beyond about 745 time scales).",
+    "Cell 5 (1.5.2): sourced acquisition exclusions (Sentinel-2A tandem pause, 13 January - 8 March 2026) are applied per pass time. No protocol window overlaps it, so no effect on the protocol runs."
+   ],
+   "changes_that_cannot_affect_window_outcomes": [
+    "Cell 7C (1.5.1): exact ILP tolerances (ILP gaps are reported, not tested)",
+    "Cell 7D (1.5.2): per-platform archive lags and precision/recall (reported, not tested)",
+    "Cell 8 (1.5.2): H3 overall status rule (H3 is reported, not tested, in this protocol)",
+    "Cells 7, 7C (1.5.2): figures (IEEE widths, hours, H1a-gap figure)",
+    "Cell 0 (1.5.2): default scenario and scenario-ledger key (the batch passes every design field explicitly; the analysis reads the per-run summary files)",
+    "Cell 0 (1.5.2): output folder on Colab: a folder holding a complete run of another release is kept and the run writes to <folder>_v152 (changes where results are written, not what they are; the batch index records the folder used)",
+    "Cells 1, 2, 9 (1.5.2): package pins and version records; deterministic sample tile; printouts"
+   ],
+   "added_designs": {
+    "role": "exploratory (unadjusted alpha, reported as exploratory, not part of the confirmatory claims)",
+    "designs": [
+     {
+      "role": "exploratory",
+      "active_roi": "ckgr_okavango",
+      "fleet": "earth-resources+planet",
+      "planet_swath_case": "conservative",
+      "exclude_satellites": [
+       "SENTINEL-2A"
+      ]
+     },
+     {
+      "role": "exploratory",
+      "active_roi": "ckgr_okavango",
+      "fleet": "earth-resources",
+      "planet_swath_case": "conservative",
+      "exclude_satellites": [
+       "SENTINEL-2A"
+      ]
+     }
+    ],
+    "reason": "Sentinel-2A is tracked (it has orbital elements) but flies an extension campaign with its own acquisition scenario, and over the CKGR it images less often than its orbit allows: in the Earth Search catalogue it imaged the CKGR every 20 days in August-October 2026, and a predicted Sentinel-2A pass over the CKGR on 13 October 2026 has no archive scene. The full-fleet designs therefore carry an optimistic Sentinel-2A contribution; the designs without it bracket the open-data results. Source for the campaign: Copernicus Data Space Ecosystem news, 'Sentinel-2A Extension Campaign to Continue Until the End of 2027', 9 October 2026."
+   },
+   "runner": "arf_batch_runner.py v1.5.2: PRIMARY, SECONDARY, then EXPLORATORY (batch names confirmatory_v152_*)",
+   "deviation_report": "Under deviations_policy this amendment is reported as a deviation from the plan frozen on 2026-10-12T19:57:45Z, with the reason above. No result under the frozen release exists, because no window had been run. Release 1.5.0 counts most Sentinel-2 observations in two strips (the Cell 5 defect above), so it is not the release of record. If results under the frozen release are also wanted, run the PRIMARY list with release 1.5.0 (pipeline_sha256_before) BEFORE the 1.5.2 batch, and analyse those runs with the frozen protocol file: release 1.5.0 has no output-folder guard and would overwrite a 1.5.2 run of the same window, whereas 1.5.2 keeps a 1.5.0 run and writes to <folder>_v152."
+  },
+  {
+   "id": "A2",
+   "date_utc": "2026-10-18T19:11:11Z",
+   "status_when_amended": "No window listed in this protocol had been run or analysed: the batch (arf_batch_runner.py) had not been started; on 18 October 2026 the Drive held no ARF_batch folder and no run folder of a protocol window. Decided before any confirmatory data existed.",
+   "release_before": "1.5.2",
+   "pipeline_sha256_before": "22896e4f1e834e355fa97bcd25cb6f1ccef48a1491ab7f7189f47774d882c313",
+   "release_after": "1.5.3",
+   "pipeline_sha256_after": "14426c89c916ffcaac032cb94ec186ef7a7f8011748044c99f2386585d917950",
+   "reason": "Evaluation of the five complete Colab runs of 15 October 2026 (release 1.5.2) found presentation defects only: Figure 5 empty when a window cannot reach 99% of the region; Figures 3 and 9 unreadable (curves pressed against an axis); Figure 7 7.75 in wide, above two IEEE columns; the budget panels (Figures 3 and 4) empty without a word when a window offers fewer than five images; a run's report headline pooling every scenario run in the same Colab kernel; superseded hypotheses printed without a label. Release 1.5.3 corrects only these.",
+   "unchanged": "hypotheses H1a, H1b, H2; thresholds; windows; evaluability rules; decision rules; alpha and the Bonferroni adjustment; the primary, secondary and exploratory designs; all settings; every computed value",
+   "changes_that_can_affect_window_outcomes": [],
+   "changes_that_cannot_affect_window_outcomes": [
+    "Cell 7 (1.5.3): Figure 3 and composite panel (c) span their data with the legend under the axes; Figures 3 and 4 state why they are empty when the window offers fewer images than the smallest budget swept (k = 5); whole-number k ticks; Figure 7 panel (b) title shortened, its cloud settings moved to the footer",
+    "Cell 7C (1.5.3): Figure 5 at the H1a level of reachable tiles (was 99% of all ROI tiles), hours on a linear axis; Figure 9 in minutes on a linear axis with each selector's largest gap; Figure 8 drawn 7.0 in wide",
+    "Cells 7, 7C, 8, 9 (1.5.3): superseded hypotheses (original H1, its time-aware variant, original H2 ratio test) labelled in the console, the report, the JSON (superseded flags) and the pipeline log",
+    "Cell 8 (1.5.3): each run's own statuses printed first and saved as hypothesis_validation.this_run; ledger-wide statuses labelled as pooled when a kernel holds more than one scenario (the batch runs each configuration in a fresh namespace, so its runs hold one scenario each)",
+    "All cells (1.5.3): version strings; Cell 0 workflow note"
+   ],
+   "evidence_no_value_changed": "Cells 6-8 of 1.5.2 and of 1.5.3 replayed on the same saved inputs, 15 runs of 12 October 2026 and 5 complete Colab runs of 15 October 2026: 240 CSV files identical (byte for byte, except the solver's wall-clock column ilp_seconds of arf_ilp_gap.csv, which differs from run to run whatever the release); 26656 JSON values identical apart from the keys 1.5.3 adds (hypothesis_validation.this_run; superseded flags); 24676 scenario_results fields identical; the report differs in label lines only; the figures 1.5.3 does not touch are byte-identical PNG files (compare_v152_v153.py; results/arf_v152_v153_identity.csv). Cells 0-5 differ from 1.5.2 in version strings and comments only, and with real Orekit reproduce Colab's refined events of the five 15 October runs row for row.",
+   "runner": "arf_batch_runner.py v1.5.3: PRIMARY, SECONDARY, then EXPLORATORY (batch names confirmatory_v153_*)",
+   "deviation_report": "Under deviations_policy this amendment is reported as a deviation from the plan as amended on 2026-10-14 (A1), with the reason above. No protocol window has been run under release 1.5.2. Release 1.5.3 computes every value as 1.5.2 does, so results under either release are the same; arf_confirmatory_analysis.py takes the release of record from this file and excludes runs of any other release."
+  },
+  {
+   "id": "A3",
+   "date_utc": "2026-10-23T14:00:06Z",
+   "status_when_amended": "The confirmatory analysis (arf_confirmatory_analysis.py) had not been run and no hypothesis outcome of any protocol run had been read: checks of the protocol runs up to this amendment read run status, settings and file checksums only (batch index files; arf_batch_audit.py: 49 of 56 runs complete and intact, 7 exploratory runs to be re-run after a Colab credential time-out). No run of the arm added here existed.",
+   "scope": "Adds an exploratory arm. The confirmatory plan is unchanged: release of record 1.5.3, designs, hypotheses, windows, thresholds, evaluability and decision rules, alpha and its adjustment.",
+   "reason": "Supervisory advice (October 2026 meeting) to keep the methodology consistent with the Starlink geometry of the defended proposal; the student's response, put to the supervisor, keeps the real Earth-observation fleets as well: the method is stated once and evaluated in two settings, the fleets in orbit today (the confirmatory designs) and a hypothetical dense Earth-observation constellation, for which the Starlink proxy supplies real orbital geometry at fleet sizes the real fleets do not reach.",
+   "release_of_arm": "1.5.4",
+   "pipeline_file_of_arm": "algorithmic_reconstruction_framework_v154.py",
+   "pipeline_sha256_of_arm": "2b618ec442e71cf896e1104c6da89c94f2d6b6785a04c4a9236b92c21115a1cb",
+   "release_1_5_4_changes": [
+    "Cell 0: Starlink proxy fleet sizes 500, 2000, 4000, 8000 allowed; ANALYSIS_EPOCH allowed for the proxy; new setting proxy_min_sun_elev_deg (None = no daylight limit, as before); output folder tag _sun<deg> when set",
+    "Cell 2: the proxy at ANALYSIS_EPOCH reads Space-Track gp_history of STARLINK objects in the 7 days before the window start (the operational filter's element-age limit), cached per window and shared by every N; satellites operational at the window start; seeded sample pinned per window, so each smaller fleet is the first N of the same seeded order as each larger one; the daylight limit attached to every proxy satellite",
+    "All cells: version strings"
+   ],
+   "evidence_real_fleets_unchanged": "Cells 0-5 of 1.5.4 with real Orekit reproduce Colab's refined events of the five complete runs of 15 October 2026 row for row (135629 rows; largest difference below 1e-13 deg); Cells 6-8 of 1.5.3 and 1.5.4 replayed on the same inputs give identical CSV files (60, apart from the solver's wall-clock column ilp_seconds), JSON values (6526), scenario_results fields (6781), report lines and figure files (45 PNG files byte-identical) (compare_v153_v154.py). The 1.5.3 validation suite passes on 1.5.4, with the Cell 0 epoch check changed for the proxy (test_cell0_v154.py) and 23 checks of the new options (test_v154_proxy.py).",
+   "arm": {
+    "role": "exploratory (no hypothesis decision; reported descriptively beside the confirmatory results)",
+    "name": "dense-constellation projection",
+    "constellation": "Starlink orbital elements (Space-Track gp_history) as the geometry of a hypothetical dense Earth-observation constellation; Starlink carries no imaging payload, so every imaging parameter below is an ASSUMPTION",
+    "active_roi": "ckgr_okavango",
+    "fleet_sizes_and_windows": {
+     "window_1 (2026-08-03T00:00:00)": [
+      100,
+      500,
+      1000,
+      2000,
+      4000,
+      8000
+     ],
+     "windows_2_to_8": [
+      100,
+      500,
+      1000
+     ],
+     "reason_for_the_split": "run time: measured without the cloud-sensitivity sweep at N = 100 and 1000 (22 and 92 min per window) and with it at N = 500 (83 min, about 35 of them the sweep), extrapolated in proportion to N: all six sizes in all eight windows need more than a week of continuous compute, beyond the submission date; window 1 gives the scaling curve over N, windows 2-8 the spread across windows for N up to 1000 (about 43 h for the 27 runs)"
+    },
+    "sample": "satellites operational at the window start (perigee >= 300 km, apogee <= 700 km, element set at most 7 days old); seeded random order (random_seed 42); a fleet of size N is the first N",
+    "imaging_assumptions": {
+     "swath_half_angle_deg": 9.22,
+     "swath_note": "release default for the proxy since the earliest runs; an assumption, not a sourced value",
+     "proxy_min_sun_elev_deg": 5.0,
+     "daylight_note": "the Landsat criterion, also assumed for Sentinel-2 (ASSUMED_MIN_SUN_ELEV_DEG); without a daylight limit the hypothetical optical constellation would image at night, unlike the real fleets",
+     "acquisition_exclusions": "none",
+     "ground_stations": "as for the real fleets (the ROI's stations)"
+    },
+    "settings": "the protocol settings, with the cloud-sensitivity sweep off (cloud_sweep_lengths_km = [], cloud_sweep_times_h = []); the 20 cloud realisations of the correlated model are kept",
+    "reason_sweep_off": "the sweep is 'reported, not tested' in the protocol, already run for the real fleets, and nearly half of a proxy run's time",
+    "reported": "per window and N: coverage, latency against the physical floor, image counts, redundancy, the H1a, H1b and H2 quantities as for the real fleets, selection time; across N in window 1: the scaling of these quantities and of run time with N; across windows 2-8 for N <= 1000: their spread. All descriptive, labelled exploratory.",
+    "not_claimed": "no confirmatory claim; no imaging capability of Starlink is implied",
+    "runs": [
+     {
+      "active_roi": "ckgr_okavango",
+      "fleet": "starlink",
+      "proxy_min_sun_elev_deg": 5.0,
+      "cloud_sweep_lengths_km": [],
+      "cloud_sweep_times_h": [],
+      "active_n": 100,
+      "analysis_epoch": "2026-08-03T00:00:00"
+     },
+     {
+      "active_roi": "ckgr_okavango",
+      "fleet": "starlink",
+      "proxy_min_sun_elev_deg": 5.0,
+      "cloud_sweep_lengths_km": [],
+      "cloud_sweep_times_h": [],
+      "active_n": 500,
+      "analysis_epoch": "2026-08-03T00:00:00"
+     },
+     {
+      "active_roi": "ckgr_okavango",
+      "fleet": "starlink",
+      "proxy_min_sun_elev_deg": 5.0,
+      "cloud_sweep_lengths_km": [],
+      "cloud_sweep_times_h": [],
+      "active_n": 1000,
+      "analysis_epoch": "2026-08-03T00:00:00"
+     },
+     {
+      "active_roi": "ckgr_okavango",
+      "fleet": "starlink",
+      "proxy_min_sun_elev_deg": 5.0,
+      "cloud_sweep_lengths_km": [],
+      "cloud_sweep_times_h": [],
+      "active_n": 2000,
+      "analysis_epoch": "2026-08-03T00:00:00"
+     },
+     {
+      "active_roi": "ckgr_okavango",
+      "fleet": "starlink",
+      "proxy_min_sun_elev_deg": 5.0,
+      "cloud_sweep_lengths_km": [],
+      "cloud_sweep_times_h": [],
+      "active_n": 4000,
+      "analysis_epoch": "2026-08-03T00:00:00"
+     },
+     {
+      "active_roi": "ckgr_okavango",
+      "fleet": "starlink",
+      "proxy_min_sun_elev_deg": 5.0,
+      "cloud_sweep_lengths_km": [],
+      "cloud_sweep_times_h": [],
+      "active_n": 100,
+      "analysis_epoch": "2026-08-10T00:00:00"
+     },
+     {
+      "active_roi": "ckgr_okavango",
+      "fleet": "starlink",
+      "proxy_min_sun_elev_deg": 5.0,
+      "cloud_sweep_lengths_km": [],
+      "cloud_sweep_times_h": [],
+      "active_n": 500,
+      "analysis_epoch": "2026-08-10T00:00:00"
+     },
+     {
+      "active_roi": "ckgr_okavango",
+      "fleet": "starlink",
+      "proxy_min_sun_elev_deg": 5.0,
+      "cloud_sweep_lengths_km": [],
+      "cloud_sweep_times_h": [],
+      "active_n": 1000,
+      "analysis_epoch": "2026-08-10T00:00:00"
+     },
+     {
+      "active_roi": "ckgr_okavango",
+      "fleet": "starlink",
+      "proxy_min_sun_elev_deg": 5.0,
+      "cloud_sweep_lengths_km": [],
+      "cloud_sweep_times_h": [],
+      "active_n": 100,
+      "analysis_epoch": "2026-08-17T00:00:00"
+     },
+     {
+      "active_roi": "ckgr_okavango",
+      "fleet": "starlink",
+      "proxy_min_sun_elev_deg": 5.0,
+      "cloud_sweep_lengths_km": [],
+      "cloud_sweep_times_h": [],
+      "active_n": 500,
+      "analysis_epoch": "2026-08-17T00:00:00"
+     },
+     {
+      "active_roi": "ckgr_okavango",
+      "fleet": "starlink",
+      "proxy_min_sun_elev_deg": 5.0,
+      "cloud_sweep_lengths_km": [],
+      "cloud_sweep_times_h": [],
+      "active_n": 1000,
+      "analysis_epoch": "2026-08-17T00:00:00"
+     },
+     {
+      "active_roi": "ckgr_okavango",
+      "fleet": "starlink",
+      "proxy_min_sun_elev_deg": 5.0,
+      "cloud_sweep_lengths_km": [],
+      "cloud_sweep_times_h": [],
+      "active_n": 100,
+      "analysis_epoch": "2026-08-24T00:00:00"
+     },
+     {
+      "active_roi": "ckgr_okavango",
+      "fleet": "starlink",
+      "proxy_min_sun_elev_deg": 5.0,
+      "cloud_sweep_lengths_km": [],
+      "cloud_sweep_times_h": [],
+      "active_n": 500,
+      "analysis_epoch": "2026-08-24T00:00:00"
+     },
+     {
+      "active_roi": "ckgr_okavango",
+      "fleet": "starlink",
+      "proxy_min_sun_elev_deg": 5.0,
+      "cloud_sweep_lengths_km": [],
+      "cloud_sweep_times_h": [],
+      "active_n": 1000,
+      "analysis_epoch": "2026-08-24T00:00:00"
+     },
+     {
+      "active_roi": "ckgr_okavango",
+      "fleet": "starlink",
+      "proxy_min_sun_elev_deg": 5.0,
+      "cloud_sweep_lengths_km": [],
+      "cloud_sweep_times_h": [],
+      "active_n": 100,
+      "analysis_epoch": "2026-08-31T00:00:00"
+     },
+     {
+      "active_roi": "ckgr_okavango",
+      "fleet": "starlink",
+      "proxy_min_sun_elev_deg": 5.0,
+      "cloud_sweep_lengths_km": [],
+      "cloud_sweep_times_h": [],
+      "active_n": 500,
+      "analysis_epoch": "2026-08-31T00:00:00"
+     },
+     {
+      "active_roi": "ckgr_okavango",
+      "fleet": "starlink",
+      "proxy_min_sun_elev_deg": 5.0,
+      "cloud_sweep_lengths_km": [],
+      "cloud_sweep_times_h": [],
+      "active_n": 1000,
+      "analysis_epoch": "2026-08-31T00:00:00"
+     },
+     {
+      "active_roi": "ckgr_okavango",
+      "fleet": "starlink",
+      "proxy_min_sun_elev_deg": 5.0,
+      "cloud_sweep_lengths_km": [],
+      "cloud_sweep_times_h": [],
+      "active_n": 100,
+      "analysis_epoch": "2026-09-07T00:00:00"
+     },
+     {
+      "active_roi": "ckgr_okavango",
+      "fleet": "starlink",
+      "proxy_min_sun_elev_deg": 5.0,
+      "cloud_sweep_lengths_km": [],
+      "cloud_sweep_times_h": [],
+      "active_n": 500,
+      "analysis_epoch": "2026-09-07T00:00:00"
+     },
+     {
+      "active_roi": "ckgr_okavango",
+      "fleet": "starlink",
+      "proxy_min_sun_elev_deg": 5.0,
+      "cloud_sweep_lengths_km": [],
+      "cloud_sweep_times_h": [],
+      "active_n": 1000,
+      "analysis_epoch": "2026-09-07T00:00:00"
+     },
+     {
+      "active_roi": "ckgr_okavango",
+      "fleet": "starlink",
+      "proxy_min_sun_elev_deg": 5.0,
+      "cloud_sweep_lengths_km": [],
+      "cloud_sweep_times_h": [],
+      "active_n": 100,
+      "analysis_epoch": "2026-09-14T00:00:00"
+     },
+     {
+      "active_roi": "ckgr_okavango",
+      "fleet": "starlink",
+      "proxy_min_sun_elev_deg": 5.0,
+      "cloud_sweep_lengths_km": [],
+      "cloud_sweep_times_h": [],
+      "active_n": 500,
+      "analysis_epoch": "2026-09-14T00:00:00"
+     },
+     {
+      "active_roi": "ckgr_okavango",
+      "fleet": "starlink",
+      "proxy_min_sun_elev_deg": 5.0,
+      "cloud_sweep_lengths_km": [],
+      "cloud_sweep_times_h": [],
+      "active_n": 1000,
+      "analysis_epoch": "2026-09-14T00:00:00"
+     },
+     {
+      "active_roi": "ckgr_okavango",
+      "fleet": "starlink",
+      "proxy_min_sun_elev_deg": 5.0,
+      "cloud_sweep_lengths_km": [],
+      "cloud_sweep_times_h": [],
+      "active_n": 100,
+      "analysis_epoch": "2026-09-21T00:00:00"
+     },
+     {
+      "active_roi": "ckgr_okavango",
+      "fleet": "starlink",
+      "proxy_min_sun_elev_deg": 5.0,
+      "cloud_sweep_lengths_km": [],
+      "cloud_sweep_times_h": [],
+      "active_n": 500,
+      "analysis_epoch": "2026-09-21T00:00:00"
+     },
+     {
+      "active_roi": "ckgr_okavango",
+      "fleet": "starlink",
+      "proxy_min_sun_elev_deg": 5.0,
+      "cloud_sweep_lengths_km": [],
+      "cloud_sweep_times_h": [],
+      "active_n": 1000,
+      "analysis_epoch": "2026-09-21T00:00:00"
+     },
+     {
+      "active_roi": "ckgr_okavango",
+      "fleet": "starlink",
+      "proxy_min_sun_elev_deg": 5.0,
+      "cloud_sweep_lengths_km": [],
+      "cloud_sweep_times_h": [],
+      "active_n": 8000,
+      "analysis_epoch": "2026-08-03T00:00:00"
+     }
+    ],
+    "n_runs": 27,
+    "runner": "arf_batch_runner_v154.py (batch name exploratory_v154_dense)",
+    "runner_sha256": "bb69e27fa5776630915cbe9c7d3e0081ef0203a5365c5471aa86ab293c4ae6e0"
+   },
+   "known_labelling_limitation": "Cell 9 records inputs.tle_source as the ROI's default ('celestrak_live') in every release, also for retrospective runs that read Space-Track gp_history (the 1.5.3 real-fleet protocol runs and the proxy runs of this arm). The element source of a run is recorded correctly in inputs.reference_epoch_source and arf_cell2_summary.json (tle_source). Not changed, so all protocol runs keep one labelling.",
+   "deviation_report": "Under deviations_policy this amendment is reported as a deviation from the plan as amended on 2026-10-18 (A2), with the reason above. It adds an exploratory arm only and was recorded before the confirmatory analysis was run."
+  },
+  {
+   "id": "A4",
+   "date_utc": "2026-10-26T12:29:16Z",
+   "status_when_amended": "POST HOC. Written after the confirmatory analysis had been run and read (primary design: H1a SUPPORTED, H1b NOT SUPPORTED, H2 SUPPORTED at alpha/3) and after the post hoc follow-ups of the real-fleet runs (arf_eo_followups.py). Everything registered here was chosen with those results known.",
+   "scope": "Registers post hoc sensitivity runs and read-only manuscript evidence. The confirmatory plan and its decisions are unchanged: release of record 1.5.3, designs, hypotheses, windows, thresholds, evaluability and decision rules, alpha and its adjustment. No A4 result can change a confirmatory decision, and every A4 result is to be reported as post hoc.",
+   "reason": "Points a referee is expected to raise. (1) H1a is met at every onset with the protocol's budget of 30 images because earliest-completion cover (ECC) searches from the physical floor, so H1a shows that the budget suffices; smaller budgets show where it starts to bind. (2) The archive validation (Cell 7D) recorded near-zero scene cloud cover in these dry-season windows, against the protocol's constant cloud probability of 0.35; the per-tile climatology option of the release shows H2 under a realistic probability. (3) H1b failed in one window (14 September) through ties with first-come-first-served; the exact minimum number of images at each onset shows whether any selector could have used fewer. (4) The exact optimum was measured on 6-h sub-problems only; one full-window instance per window measures ECC's greedy cover against the exact minimum at full scale and repeats the confirmatory run otherwise (determinism check).",
+   "runs": {
+    "release": "1.5.3",
+    "pipeline_sha256": "14426c89c916ffcaac032cb94ec186ef7a7f8011748044c99f2386585d917950",
+    "design": {
+     "active_roi": "ckgr_okavango",
+     "fleet": "earth-resources+planet",
+     "planet_swath_case": "conservative"
+    },
+    "windows": [
+     "2026-08-03T00:00:00",
+     "2026-08-10T00:00:00",
+     "2026-08-17T00:00:00",
+     "2026-08-24T00:00:00",
+     "2026-08-31T00:00:00",
+     "2026-09-07T00:00:00",
+     "2026-09-14T00:00:00",
+     "2026-09-21T00:00:00"
+    ],
+    "variants": {
+     "k05": {
+      "max_selection_steps": 5
+     },
+     "k10": {
+      "max_selection_steps": 10
+     },
+     "k15": {
+      "max_selection_steps": 15
+     },
+     "k20": {
+      "max_selection_steps": 20
+     },
+     "earthenv": {
+      "cloud_probability_source": "earthenv"
+     },
+     "ilp48": {
+      "ilp_horizon_hours": 48,
+      "ilp_instances": 1,
+      "ilp_max_pairs": 3000000,
+      "ilp_time_limit_s": 900.0
+     }
+    },
+    "n_runs": 48,
+    "batch_name": "sensitivity_v153_a4",
+    "output_folders": "MyDrive/ARF_sensitivity_A4/<variant>/<window> (never the confirmatory folders)",
+    "runner": "arf_sensitivity_runner_a4.py",
+    "runner_sha256": "02195261d337d5da93cd72950f1a9811c0da55a14861bd2f144b503b25df2d42"
+   },
+   "analyses": {
+    "arf_sensitivity_summary_a4.py": {
+     "sha256": "1ba9a332fde0198cd8386eaaba7c4779c01e93e71f9c7b701cfc07ca16717ba4",
+     "content": "budget, cloud-probability and full-window optimum tables"
+    },
+    "arf_exact_economy_a4.py": {
+     "sha256": "0301739fbc0d350a0da8e9c12c22392036e6fe78085c80927068aac0dd63a8ce",
+     "content": "at every onset of every primary window (clear sky), the exact minimum number of images, among those delivered by ECC's completion time, that reach the H1a level (integer programme), against ECC's and FCFS's image counts; from a replay of Cells 6-8 that must reproduce the run's arf_onset_robustness.csv byte for byte"
+    },
+    "arf_paper1_evidence.py": {
+     "sha256": "e8cc7c723509a5399eb03cfe7c0e0654223e83cdaa47b1bec8271303f4abbc2b",
+     "content": "read-only evidence from the confirmatory primary runs: selectors at the H1a level, the existing 6-h exact optima, the four-plan H2 bracket and cloud-scale sweep, archive validation per platform with observed scene cloud, and exact one-sided sign and Wilcoxon tests over windows (complements to the protocol's Student-t bounds)"
+    }
+   },
+   "revisions": [
+    "2026-10-26 (no A4 result had been analysed): arf_exact_economy_a4.py stopped on window 1 in Colab because its replay (arf_colab_parity.replay) rebuilds the fleet's altitude and orbital period from the rounded period, about 1e-13 min off the run's; the replay now takes both from the run's arf_cell2_summary.json, and a replay that is not byte-identical is accepted only if the columns the analysis uses are exactly equal and every other column agrees to a relative 1e-9, with the differences printed"
+   ],
+   "reporting_rule": "Every A4 number is labelled post hoc in the thesis and in any manuscript, and is reported beside, never instead of, the confirmatory decisions."
+  },
+  {
+   "id": "A5",
+   "date_utc": "2026-10-28T16:44:30Z",
+   "status_when_amended": "EXPLORATORY. Written after the confirmatory results and the A4 post hoc results were read, and before any run of the windows below existed.",
+   "scope": "Adds an exploratory arm. The confirmatory plan and its decisions are unchanged. No A5 result is a hypothesis decision; every A5 number is reported as exploratory, beside the confirmatory results.",
+   "reason": "The eight confirmatory windows (August and September 2026) lie in months whose EarthEnv climatology over the region is 4.9% (August) and 8.3% (September) cloud frequency (A4 runs), and the archived scenes of the first window were almost cloud-free (Cell 7D); the value of acting on cloud observations (H2) is therefore tested where cloud is rare. A5 repeats the primary design in eight windows of January and February 2026, run retrospectively, with the protocol's constant cloud probability and with the climatology.",
+   "runs": {
+    "release": "1.5.3",
+    "pipeline_sha256": "14426c89c916ffcaac032cb94ec186ef7a7f8011748044c99f2386585d917950",
+    "design": {
+     "active_roi": "ckgr_okavango",
+     "fleet": "earth-resources+planet",
+     "planet_swath_case": "conservative"
+    },
+    "windows": [
+     "2026-01-05T00:00:00",
+     "2026-01-12T00:00:00",
+     "2026-01-19T00:00:00",
+     "2026-01-26T00:00:00",
+     "2026-02-02T00:00:00",
+     "2026-02-09T00:00:00",
+     "2026-02-16T00:00:00",
+     "2026-02-23T00:00:00"
+    ],
+    "window_hours": 48,
+    "variants": {
+     "p035": {},
+     "earthenv": {
+      "cloud_probability_source": "earthenv"
+     }
+    },
+    "n_runs": 16,
+    "batch_name": "wetseason_v153_a5",
+    "output_folders": "MyDrive/ARF_wetseason_A5/<variant>/<window> (never an earlier run folder)",
+    "element_sets": "Space-Track gp_history as of each window start (7-day lookback), fetched by the release's own functions (arf_colab_prefetch_wet_a5.py)",
+    "climatology": "EarthEnv MODCF_monthlymean_01.tif and _02.tif (Wilson & Jetz 2016; CC BY-NC 4.0)",
+    "stated_limit": "the fleet is built from the current CelesTrak list, so satellites retired since the window drop out (Cell 2)"
+   },
+   "scripts": {
+    "arf_wetseason_runner_a5.py": "f8daf1f2f7d6b8fe69673ed204e22e88d30d7a2cbb105516be6a9be666906f0c",
+    "arf_colab_prefetch_wet_a5.py": "298c31b6fc79e663711942c9aedffc0ff3879c7417dde85523ababc43b0ea451",
+    "arf_wetseason_summary_a5.py": "321abaca621ee81e87ea7d644248a9c50a42914e37ecee8fbdaa116cf6192ce3"
+   },
+   "analysis": "descriptive: per window H1a, H1b, H2 by the protocol's own window rules; over windows the mean, SD, one-sided Student-t lower bounds at alpha and alpha/3, exact one-sided sign and Wilcoxon tests; observed scene cloud of the archived acquisitions; beside the dry-season values"
+  },
+  {
+   "id": "A6",
+   "date_utc": "2026-10-29T15:47:24Z",
+   "status_when_amended": "POST HOC. Written after the confirmatory, A4 and A5 results were read; no new pipeline runs.",
+   "scope": "Adds a read-only analysis of the confirmatory primary runs. No decision changes; reported as post hoc.",
+   "reason": "Image counts do not show data volume: sensors differ by a factor of 10 to 100 in MB per km2. A6 converts the images ECC and first-come-first-served use to reach the H1a level into the volume of distributed products covering the region, with sourced per-sensor rates.",
+   "rates_mb_per_km2": {
+    "Sentinel-2": [
+     0.066,
+     0.08
+    ],
+    "Landsat": [
+     0.02,
+     0.035
+    ],
+    "PlanetScope": [
+     0.78,
+     2.43
+    ]
+   },
+   "rate_sources": {
+    "Sentinel-2": "Copernicus Collection-1 Level-2A product page: 'Data Volume 800 MB (each 110x110 km2)', on a 100 km tile step",
+    "Landsat": "USGS LSDS-1619 v6.0 (Landsat 8-9 Collection 2 Level-2 Science Product Guide), Table A-1 file sizes, over a 185 x 180 km scene (LSDS-2082)",
+    "PlanetScope": "Planet PSScene product specification (June 2026): 'File Size 500 - 700 MB (4-band multispectral image)', over the PS2, PS2.SD and PSB.SD frames"
+   },
+   "tile_area_km2": 5.16,
+   "statement": "Sentinel-2 and Landsat acquire on fixed plans; a smaller selection saves the user's download, storage and processing, not on-board energy or downlink.",
+   "script": {
+    "arf_data_volume_a6.py": "32e99661a761c6b36a9e1b2bc9c03681fda249f21fa706d615c0a234b2811d82"
+   }
+  },
+  {
+   "id": "A7",
+   "date_utc": "2026-10-30T09:54:23Z",
+   "status_when_amended": "POST HOC. Written after the confirmatory, A4, A5 and A6 results and an external literature benchmarking review were read; no new pipeline runs.",
+   "scope": "Read-only summaries of outputs already written by the real-fleet runs of release 1.5.3 and the A5 runs. No decision changes; reported as post hoc.",
+   "reason": "Reviewers compare time to coverage with published revisit times and ask whether the image saving holds against a standard greedy cover, not only first-come-first-served. A7 reports the physical floor in hours with the reachable share of the region, the images of ECC, coverage-first greedy, time-aware greedy and FCFS at the same coverage level, and window-block bootstrap intervals (the window is the unit of independence).",
+   "metrics": [
+    "physical floor t* (h) to 95% of reachable tiles",
+    "reachable share of the region",
+    "share of onsets reaching 95% of the whole region",
+    "images per selector at the level",
+    "paired image saving of ECC vs coverage-first greedy and vs FCFS",
+    "cloud floor per realisation"
+   ],
+   "uncertainty": {
+    "method": "window-block bootstrap, percentile 95% interval",
+    "resamples": 10000,
+    "seed": 20261030
+   },
+   "script": {
+    "arf_benchmark_a7.py": "fac82eefa288b3060b306971a3aa20f51fce83a822245152c372ea4a9f7e5b95"
+   }
+  },
+  {
+   "id": "A8",
+   "date_utc": "2026-10-30T11:39:16Z",
+   "status_when_amended": "POST HOC. Written after the confirmatory and A4-A7 results and an external literature benchmarking review were read; no new pipeline runs.",
+   "scope": "Reads the real Sentinel-2 L2A Scene Classification Layer of every Sentinel-2 scene over the region in the 16 primary-design windows (8 dry, 8 wet). Descriptive; no decision changes.",
+   "reason": "The pipeline's cloud is modelled. A8 measures real cloud for the open part of the fleet with freely readable per-pixel masks, to set the model's cloud probability against observation, to count how often the Fail-Signal would fire on real scenes, and to give the delay real cloud adds to Sentinel-2 coverage in hours.",
+   "method": {
+    "catalogue": "Earth Search v1 (stac_search of release 1.5.3, Cell 7D)",
+    "collections": [
+     "sentinel-2-c1-l2a",
+     "sentinel-2-l2a"
+    ],
+    "asset": "scl",
+    "read_resolution_m": 80,
+    "points_per_tile": 7,
+    "clear_classes": [
+     4,
+     5,
+     6,
+     11
+    ],
+    "cloud_classes": [
+     3,
+     8,
+     9,
+     10
+    ],
+    "sensitivity": "class 7 as clear",
+    "class_source": "ESA Sentinel-2 Level-2A algorithm overview (scene classification)"
+   },
+   "not_measured": "PlanetScope (no open per-pixel masks without a licence); Landsat (requester-pays assets)",
+   "script": {
+    "arf_real_cloud_a8.py": "b703c7d08a8c2006af41b453e946994d6b5ea985045041d75b09bce4da953bba"
+   }
+  },
+  {
+   "id": "A9",
+   "date_utc": "2026-10-30T14:33:45Z",
+   "status_when_amended": "POST HOC. Written after the confirmatory and A4-A8 results and an external literature benchmarking review were read; no new pipeline runs (replays of saved inputs only).",
+   "scope": "Replays Cells 6-8 of release 1.5.3 on the saved inputs of the 16 primary-design windows (8 dry, 8 wet A5 p = 0.35 runs). Descriptive; no decision changes.",
+   "reason": "A4 showed where the image budget binds but not whether ECC's misses at tight budgets are optimal; A9 decides each exactly. H2 reports the Fail-Signal in coverage points; A9 gives the same comparison in hours.",
+   "part_1": {
+    "budgets": [
+     5,
+     10,
+     15,
+     20
+    ],
+    "onset_sample_min": 80,
+    "level_pct_of_reachable": 95.0,
+    "exact_method": "solve_ilp_min_images (release 1.5.3, HiGHS) on the images delivered by t; bisection over delivery times (feasibility is monotone in t)",
+    "time_limit_s": 300
+   },
+   "part_2": {
+    "objective": "time_aware",
+    "plans": [
+     "adaptive (Fail-Signal)",
+     "open-loop expected coverage, same images"
+    ],
+    "metric": "open-loop time to its own final coverage minus adaptive time to the same coverage (h); times to 50% and 80% of reachable tiles"
+   },
+   "script": {
+    "arf_exact_time_a9.py": "33b0b13851254c2a9761bfc3797e25a9446d3023aaabf98549d70cc8189dc0d2"
+   }
+  },
+  {
+   "id": "A10",
+   "date_utc": "2026-10-31T07:17:05Z",
+   "status_when_amended": "POST HOC CORRECTION. Written after the A6 results were read, on finding an error in A6.",
+   "corrects": "A6",
+   "error": "A6 gave every usable tile the global mean area of an H3 resolution-7 cell (5.16 km2). Over the CKGR+Okavango region the cells average 5.96 km2 (12,231 cells, 72,853 km2 by h3.cell_area), so every A6 volume was about 15% too low. Shares, percentage reductions and the PlanetScope share are almost unaffected (areas vary 5.85-6.07 km2 across the region).",
+   "correction": "Each image's footprint area is the sum of its usable tiles' own areas (h3.cell_area, km2). All other A6 definitions, rates and sources are unchanged. A6 results are superseded by A10.",
+   "scope": "Read-only replay of the 8 primary windows, as A6. No decision changes; reported as post hoc.",
+   "script": {
+    "arf_data_volume_a10.py": "08bc3976db0896898c7cf025f1ff240c981d46f344dee10516f5c2d42fa74d13"
+   }
+  },
+  {
+   "id": "A11",
+   "date_utc": "2026-10-31T08:22:31Z",
+   "status_when_amended": "POST HOC CORRECTION. Written after the A10 results were read, on checking the A6 rate sources against their documents while drafting the Methods.",
+   "corrects": [
+    "A10",
+    "A6"
+   ],
+   "error": {
+    "PlanetScope": "The upper rate (2.43 MB/km2) divided 700 MB by the 287.5 km2 frame of PS2 (Dove Classic, 25 x 11.5 km), whose imagery ended in April 2022 (Planet, PlanetScope Product Specifications, June 2026, Sec. 2.1, Table 2-A). The pipeline models the current fleet as PS2.SD or PSB.SD (Cell 0, MISSION_TABLE).",
+    "Landsat": "The scene area (185 x 180 km) is not stated in the source cited (LSDS-1619 v6.0)."
+   },
+   "correction": {
+    "rates_mb_per_km2": {
+     "Sentinel-2": [
+      0.066,
+      0.08
+     ],
+     "Landsat": [
+      0.022,
+      0.038
+     ],
+     "PlanetScope": [
+      0.78,
+      1.22
+     ]
+    },
+    "PlanetScope": "500-700 MB per 4-band scene (Table 3-B) over the PS2.SD 25 x 23.0 km and PSB.SD 32.5 x 19.6 km frames (Table 3-C): 500/637 and 700/575.",
+    "Landsat": "LSDS-1619 v6.0 Table A-1 sizes (674,478 KB if the seven surface-reflectance bands are one 83,000 KB entry; 1,172,478 KB if per band) over the USGS EROS Landsat 8 scene size, 'approximately 170 km north-south by 183 km east-west' (catalog.data.gov/dataset/landsat-8).",
+    "Sentinel-2": "unchanged",
+    "also": "per-sensor usable footprint areas (km2) are written for ECC and FCFS, so a later rate change needs no replay"
+   },
+   "scope": "Read-only replay of the 8 primary windows, as A6 and A10. No decision changes; reported as post hoc. A11 supersedes A10 and A6.",
+   "script": {
+    "arf_data_volume_a11.py": "8b60550e0ef1eb4c914f532eaca5fbfa90ac1d71e0bcb5b65b13e4cc03258c66"
+   }
+  },
+  {
+   "id": "A12",
+   "date_utc": "2026-11-04T12:30:50Z",
+   "status_when_amended": "POST HOC. Written after the confirmatory results and A4 to A11 were read. While the script was tested, it was run on the window of 3 August 2026 (sandbox copy of that run): median floor 12.1 h = W 10.6 h + G 0.2 h + L 0 h. No other window has been decomposed.",
+   "question": "What sets the physical floor: the wait for the first usable pass, the coverage geometry, or delivery?",
+   "method": "Each onset's floor (95% of reachable cells, clear sky, 24-h horizon) split exactly into W (onset to the first acquisition with a usable cell), G (that acquisition to the acquisition of the pass that completes the level) and L (acquisition to delivery of that pass); sun elevation at the region's centroid at the onset from the pipeline's NOAA routine. Every floor and reachable count is recomputed from arf_refined_events.csv and must equal arf_onset_robustness.csv, or the script stops.",
+   "scope": "Read-only replay of the 8 primary dry-season windows (3 Aug to 21 Sep 2026) and the 8 wet-season windows of A5 (5 Jan to 23 Feb 2026, p = 0.35 runs). Descriptive; no hypothesis, no decision changes.",
+   "script": {
+    "arf_floor_decomposition.py": "8b8259f5ef2afb14b2804337b511b92aafda01de8d567d01c21ebbea97436423"
+   }
+  },
+  {
+   "id": "A13",
+   "date_utc": "2026-11-04T12:30:50Z",
+   "status_when_amended": "POST HOC. Written after the confirmatory results and A4 to A11 were read, to bound the first limitation (every daylight PlanetScope pass assumed to acquire). While the script was tested, it was run on the window of 3 August 2026 (sandbox copy of that run, 20 seeds): H1a share 100% at every fraction; H1b share 100, 96.5, 84.0 and 52.9% at f = 1, 0.75, 0.5 and 0.25; median floor unchanged at 12.1 h. No other window has been replayed.",
+   "question": "How do the floor, the reachable share and the H1a and H1b shares change if only a fraction f of PlanetScope's predicted daylight passes acquire an image?",
+   "method": "A PlanetScope pass is a maximal run of consecutive minutes of one FLOCK satellite. Per seed (1 to 20) each pass gets one uniform draw u and acquires when u < f (nested fractions f = 1, 0.75, 0.5, 0.25); Sentinel-2 and Landsat passes are always kept. Per onset, the floor, reachable count, ECC (k = 30) and FCFS image count are recomputed with the rules of Cell 7C; at f = 1 every onset must equal the run's arf_onset_robustness.csv (floor, reachable, ECC time, ECC images, FCFS images), or the script stops. H1a and H1b shares by the protocol's rules, margin = the run's t_max_wait_min.",
+   "scope": "Read-only replay of the 8 primary dry-season windows (3 Aug to 21 Sep 2026) and the 8 wet-season windows of A5 (5 Jan to 23 Feb 2026, p = 0.35 runs). Descriptive sensitivity analysis; no hypothesis, no decision changes. It bounds the acquisition assumption from the model side; it does not measure Planet's acquisition fraction, which needs catalogue metadata.",
+   "script": {
+    "arf_planet_thinning.py": "bfb122f7dd57e3adfa69e033f6882f3cf5e2f019654bc3ad7d1ebf45f8434d9a"
+   }
+  },
+  {
+   "id": "A14",
+   "date_utc": "2026-11-07T20:41:38Z",
+   "status_when_amended": "POST HOC. Written after the confirmatory results and A4 to A13 were read. While the script was tested, it was run on the window of 3 August 2026 (sandbox copy of that run, 73 onsets): mean images ECC 6.88, WANG26 7.63, PAN24 7.93, KS17 10.32, FCFS 11.37; every method reached the level within the H1a margin of the floor at every onset. No other window has been replayed.",
+   "question": "How does ECC compare with published image selectors given exactly the same candidates: the run's predicted events of the 24 h after each onset, clear sky, H3 resolution 7, 95% of the reachable cells?",
+   "method": "Three selectors re-implemented from their published descriptions, adapted to predicted passes measured from the onset: WANG26 (Wang et al. 2026, Remote Sensing 18(11):1855, sections 3.3 to 3.5: rank by time, resolution, cloud; accept an image that intersects the remaining target; remove invalid coverage; earliest delivery after the onset stands for 'most recent'), reported stopped at the level and run to full coverage; KS17 (Kempeneers and Soille 2017, Big Earth Data 1(1-2):145-158: per tile, minimum set of at most 5 images maximising covered cells by Sequential Floating Forward Search; tile = H3 resolution-3 parent; the SFFS body is the standard one of Pudil et al. 1994, an assumption, because the article's steps were not available to us); PAN24 (Pan et al. 2024, Geo-spatial Information Science 27(5):1524-1541: shortest span of delivery times after the onset whose images reach the level, ties to the earliest span, then the images of that span by largest new coverage; HFA-Net quality grading has no counterpart for predicted passes and is not used). Per onset: time to the level, images, coverage reached. The floor, ECC and FCFS are recomputed with the A13 port of Cell 7C and must equal the run's arf_onset_robustness.csv, or the script stops.",
+   "scope": "Read-only replay of the 8 primary dry-season windows (3 Aug to 21 Sep 2026) and the 8 wet-season windows of A5 (5 Jan to 23 Feb 2026, p = 0.35 runs), and of the A15 windows once run. Descriptive; no hypothesis, no decision changes.",
+   "script": {
+    "arf_published_selectors.py": "86e67b9a8f6237668e7ad6ec8b3f6877910395cfee452c848ddcfa7dc2b96388"
+   }
+  },
+  {
+   "id": "A15",
+   "date_utc": "2026-11-07T20:41:38Z",
+   "status_when_amended": "REGISTERED REPLICATION, POST HOC IN MOTIVATION. Written after the confirmatory results and A4 to A13 were read (H1b was decided by one of eight windows), and before any run of the windows below existed.",
+   "question": "Do H1a, H1b and H2 hold in eight further windows of the 2026 dry season?",
+   "windows": [
+    "2026-07-06T00:00:00",
+    "2026-07-13T00:00:00",
+    "2026-07-20T00:00:00",
+    "2026-07-27T00:00:00",
+    "2026-09-28T00:00:00",
+    "2026-10-05T00:00:00",
+    "2026-10-12T00:00:00",
+    "2026-10-19T00:00:00"
+   ],
+   "reason": "The dry season over the region runs from May to October, with dryland fire activity peaking in September (Heinl et al. 2007) and the Okavango flood at its maximum extent in July to September (Inman and Lyons 2020). The added windows extend the confirmatory windows (3 August to 21 September) to July and to late September and October. The same weeks of 2025 are not used: the pipeline builds the fleet from the current CelesTrak lists, so satellites retired since 2025 would drop out.",
+   "method": "Release 1.5.3 unchanged, primary design (CKGR + Okavango, earth-resources+planet, conservative swath, p = 0.35), run retrospectively with Space-Track gp_history element sets; runner arf_dryext_runner_a15.py (the A5 runner with these windows and the p = 0.35 setting only).",
+   "decision_rules": "H1a, H1b and H2 are decided on these eight windows alone, by the protocol's decision_rules: one-sided Student-t lower bound of the mean over windows at alpha/3 at least threshold_pct (H1a, H1b) or above 0 (H2); a window counts with at least min_evaluable_onsets evaluable onsets; a hypothesis is decided only with at least 5 windows. The original confirmatory decisions are not changed. Over all sixteen dry-season windows the statistics are reported descriptively, with no decision.",
+   "scope": "Adds eight runs. Decisions reported as a registered replication beside the confirmatory decisions.",
+   "script": {
+    "arf_dryext_runner_a15.py": "7db3ae85851fca29c943a5c63655840db00440078104683871173b635bdb3606",
+    "arf_colab_prefetch_dryext_a15.py": "0d7c2053b621c97757d345f5d7a7d4ebca557fb8d82f4e277d99f185ff948cd9",
+    "arf_dryext_summary_a15.py": "9d7c046e24962a5494e90da30105c87f20e3cd8cb36e491ec5a0dca210c6fb95"
+   }
+  },
+  {
+   "id": "A16",
+   "date_utc": "2026-11-07T20:41:38Z",
+   "status_when_amended": "POST HOC. Written after the confirmatory results and A4 to A13 were read. Part a was tested on the window of 3 August 2026 (sandbox copy of that run): ECC stayed within the H1a margin of the floor at every onset in every scenario; the median floor rose from 12.1 h to 13.8 h (fast), 15.3 h (typical) and 36.1 h (slow). Part b was tested only on synthetic quality bands; no real Landsat scene has been read.",
+   "question": "(a) How do the floor, ECC and FCFS change when real product latencies are added to delivery? (b) How cloudy were the Landsat 8 and 9 acquisitions of the primary windows?",
+   "method": "(a) Per-mission latency added to every delivery time; scenarios (Sentinel-2, Landsat, PlanetScope, hours): fast 1.67, 4, 2; typical 3, 6, 6; slow 24, 12, 24; and PlanetScope 2, 6, 12 or 24 with Sentinel-2 3 and Landsat 6. Sources: ESA Sentinel-2 MSI Technical Guide timeliness (Real-Time no later than 100 min; Near Real-Time 100 min to 3 h; Nominal 3 to 24 h); USGS Landsat Collection 2 Level-1 (Real-Time 4 to 6 h, under 12 h). No published PlanetScope latency was found: its values are scenarios. Recomputed with the registered A13 port; identity with arf_onset_robustness.csv at zero latency, or the script stops. (b) Landsat 8/9 Collection 2 Level-2 QA_PIXEL (USGS LSDS-1619 v6.0, Table 6-2) read from Microsoft Planetary Computer (collection landsat-c2-l2, anonymous signing), sampled at the 7 points per tile of A8; a point is cloudy when bit 1, 3 or 4 is set (sensitivity: or bit 2); the tile and overpass rules of A8.",
+   "scope": "(a) Read-only replay of the 8 primary dry-season windows (3 Aug to 21 Sep 2026) and the 8 wet-season windows of A5 (5 Jan to 23 Feb 2026, p = 0.35 runs) and of the A15 windows once run. (b) The same windows. Descriptive; no hypothesis, no decision changes. PlanetScope cloud (UDM2) is not measured: it needs a Planet licence.",
+   "script": {
+    "arf_product_latency.py": "39a8241b22db93dbcf92016a2e833f669216e07b2c19c10d2e2dfb06749b82c2",
+    "arf_real_cloud_landsat_a16.py": "4e1d0dfaccf92e3055b2fb4d8ae665acba8fa022d0acaf1ea80a1f96b1a703d9"
+   }
+  },
+  {
+   "id": "A17",
+   "date_utc": "2026-11-09T13:25:35Z",
+   "status_when_amended": "EXPLORATORY, REGISTERED BEFORE ANY OF ITS RUNS. Written after the confirmatory results and A4 to A16 were registered, and after the 26 runs of the dense arm of A3 (release 1.5.4), which are superseded and not reported: they gave every Starlink satellite an off-nadir half-angle of 9.22 deg that has no source (a ground swath of about 155 to 180 km). The scripts were tested on synthetic Starlink-like orbits only (N = 5, 20 and 100 with real Orekit, window of 3 August 2026); no result has been seen.",
+   "question": "How do the earliest-completion floor, the reachable share of the region and the image economy of ECC change with the size N of a dense Earth-observation constellation, and beyond which N does the floor stop falling? (Objectives O1 to O4 of the proposal at the densities it names, N = 5, 20 and 100, and beyond.)",
+   "design": {
+    "release": "1.5.5 (SHA-256 5cbfdd734fd4d68cd1b72fe701f7438d34456dee53db279b2ffab66d569d2788)",
+    "geometry": "Starlink satellites operational at each window start (Space-Track gp_history), one seeded random order per window, nested fleets (the first N)",
+    "assumed_camera": "nadir, ground swath proxy_swath_km; imaging only with the Sun at least proxy_min_sun_elev_deg above the imaged point; primary 32.5 km (PlanetScope SuperDove frame width, ESA Earth Online, accessed 4 Nov 2026) and 10 deg (Planet's constraint for the Doves, cited in Paper 1)",
+    "region_and_windows": "CKGR + Okavango; the eight protocol windows (3 August to 21 September 2026)",
+    "settings": "every protocol setting, cloud-sensitivity sweep off",
+    "core": "32.5 km, 10 deg; N = 5, 20, 100, 250, 500, 1000, 2000 in all eight windows; N = 4000 in the windows of 3 August and 7 September",
+    "sensitivity": "8 km (Planet Pelican Gen 1) and 185 km (Landsat 9) at 10 deg, and 32.5 km at 5 deg; N = 100, 250, 500, 1000, 2000 in the windows of 3 August and 7 September",
+    "not_included": "comparator constellations (Walker-delta, the sun-synchronous Starlink shell alone, PlanetScope at matched N) and a 2025 window set: both await the supervisors' decision and, if approved, are added by a later amendment before they are run",
+    "fleet_size_note": "N = 250 replaces the 200 of the Paper 2 plan: 200 is not a fleet size the release accepts"
+   },
+   "analysis": "Descriptive; no hypothesis decision. Per run: the medians over onsets of the floor to 95% of the reachable cells and of the reachable share; the share of onsets covering 95% of the whole region; ECC and FCFS images; H1a- and H1b-type shares; the Fail-Signal gain. Means over windows with window-block bootstrap 95% intervals (B = 2000, seed 42). Saturation of the core floor against N, three ways, each with window-block bootstrap intervals: T(N) = T_inf + a N^-b with N* = (a/m)^(1/b) and the smallest grid N within m of T_inf, for m = 0.5 h and 1 h; a one-breakpoint segmented regression on log10 N (Muggeo 2003); the Kneedle knee (Satopaa et al. 2011).",
+   "scope": "New runs only, in folders tagged _sun<deg>_sw<km>km that no earlier run uses; real-fleet results and decisions unchanged. Reported in Paper 2 as an exploratory study on an assumed instrument.",
+   "script": {
+    "arf_paper2_runner_a17.py": "a075d4b50e7a032987437a3e685cfb6db08ac515cf97d72e8de320ed9abac153",
+    "arf_paper2_summary_a17.py": "a2ace80f1f78598aac0c296d87f41848cf7703f59077b59efc98b169555c1321",
+    "algorithmic_reconstruction_framework_v155.py": "5cbfdd734fd4d68cd1b72fe701f7438d34456dee53db279b2ffab66d569d2788",
+    "arf_batch_runner_v154.py": "bb69e27fa5776630915cbe9c7d3e0081ef0203a5365c5471aa86ab293c4ae6e0"
+   }
+  },
+  {
+   "id": "A18",
+   "date_utc": "2026-11-10T17:33:31Z",
+   "status_when_amended": "CORRECTION OF A17'S RELEASE, REGISTERED BEFORE ANY OF ITS CORE OR SENSITIVITY RUNS. Only the A17 smoke stage had run (release 1.5.5; N = 5 and 20, window of 3 August 2026, 10 November 2026). Its log reported 104 of 10,881 Starlink element sets as malformed. A read-only check of the cached Space-Track files, with the parsing steps of 1.5.5, found every rejected record to carry an Alpha-5 catalogue number, and the number rising with the window: 104, 152, 176, 229, 309, 365, 418 and 424 of 10,881 to 11,135 records (3 August to 21 September 2026). The two smoke runs are superseded and not reported; their folders are kept. No other A17 run exists.",
+   "reason": "Catalogue numbers of 100000 and above are written in the 5-character TLE field as Alpha-5: a leading capital letter, A = 10 to Z = 33 with I and O omitted, so that 339999 => Z9999 (Space-Track documentation, section Alpha-5, read 10 November 2026). Release 1.5.5 read the field as an integer, so every Starlink satellite catalogued since number 100000 was reached was rejected, and the samples were drawn from the older satellites only, a bias that grows across the eight windows.",
+   "change": "Release 1.5.6 decodes Alpha-5 in the operational filter and in the pin file (Cell 2) and names its pin files _opsample_a5 so that no 1.5.5 pin is reused. Nothing else changes; Orekit 13.1.9 already decodes Alpha-5 in TLE(line1, line2). Real fleets are unaffected: their catalogue numbers come from the OMM field NORAD_CAT_ID, not from the TLE line, in release 1.5.3 as in 1.5.6.",
+   "checks": "Sandbox, no network: the decoding agrees with Space-Track's examples and, for all 24 letters, with Orekit's own decoding of checksummed lines; on synthetic Starlink-like element sets numbered from 99000 (9,085 of 10,084 Alpha-5), 1.5.5 rejects all 9,085 and 1.5.6 none, the two select identically on 5-digit records, and Cells 0 to 9 of 1.5.6 run without error at N = 20 and 100 with 16 of 20 and 88 of 100 Alpha-5 satellites in the fleet.",
+   "design": "A17's design, analysis and scope unchanged in every other respect: release 1.5.6 (SHA-256 240698a9c52c6f4a17bf16ae489fdea5cba721e0ec0795a9973c1a368b2532b3) in place of 1.5.5; batches paper2_v156_a18_smoke, paper2_v156_a18_core and paper2_v156_a18_sens; summary written to ARF_batch/paper2_a18. Where a 1.5.5 smoke folder already holds a complete run, 1.5.6 writes to the same name with the suffix _v156 (Cell 0 rule since 1.5.2).",
+   "script": {
+    "arf_paper2_runner_a18.py": "7609d36a88e1f5568d60e1aeb5a8e3f8078b5f9d30f1ba68274ca192a4a245b7",
+    "arf_paper2_summary_a18.py": "7ff319cae605eb2922d464f44d710eeaa7cdeb2d45228cf7ca6b6cc4ad1e52a3",
+    "algorithmic_reconstruction_framework_v156.py": "240698a9c52c6f4a17bf16ae489fdea5cba721e0ec0795a9973c1a368b2532b3",
+    "arf_batch_runner_v154.py": "bb69e27fa5776630915cbe9c7d3e0081ef0203a5365c5471aa86ab293c4ae6e0"
+   }
+  },
+  {
+   "id": "A19",
+   "date_utc": "2026-11-15T21:12:59Z",
+   "status_when_amended": "POST HOC. Registered AFTER the 88 runs of A17/A18 (release 1.5.6; 58 core, 30 sensitivity, all done, 10 to 15 November 2026) and after their summary had been read. Nothing of A19 had been run when it was registered. Every A19 result is to be labelled post hoc.",
+   "what_was_seen": "(1) The saturation fit registered in A17 failed: fitted to N = 5 to 4000 it returned a limit of 0 h and N* of the order of 10^12. Cause: the floor is the time to 95% of the REACHABLE cells, and below N = 500 the reachable share itself grows with N (9, 29, 81, 98% at N = 5, 20, 100, 250; 100% from N = 500), so the mean floor rises from 14.4 h (N = 5) to 19.4 h (N = 100) before it falls: 15.3, 9.8, 6.0, 4.1 and 3.2 h at N = 250 to 4000. The failed fit is reported as failed. (2) In the two windows that hold N = 4000 (3 August, 7 September) the floor fell by 1.35 and 1.13 h from N = 2000 to 4000: not yet level. (3) ECC runs with at most 30 images (max_selection_steps, the Paper 1 setting) and its FCFS comparator without a cap. At 8 km FCFS needs 78 to 230 images from N = 250, so ECC never completes there (8 of 8 runs); at 32.5 km ECC uses 27 to 29 images at N = 250 and reaches the floor within the margin at 88.7% of onsets.",
+   "a_ecc_cap_replay": "Read-only replay of every finished 1.5.6 run from its own arf_refined_events.csv with the rules of Cell 7C: ECC at k = 30 (which must equal the run's arf_onset_robustness.csv at every onset: floor, ECC time, ECC images, FCFS images, reachable cells; the replay stops otherwise), at k = 60 and 120, and without a cap. Without a cap ECC completes at the floor by construction when no image lists a cell twice (reported per run); what that case measures is the number of images. Reported per camera and N: images of FCFS and of ECC without a cap, share of onsets completed at each cap, delay over the floor.",
+   "b_restricted_fit": "Core case (32.5 km, sun 10 deg), runs with N >= 500 only. T(N) = T_inf + a N^-b by least squares (0 <= T_inf <= min T, 0.01 <= b <= 5), window-block bootstrap (B = 2000, seed 42). N*_m = (a/m)^(1/b), m = 0.5 h and 1 h (A17's definition). Variants, all reported: all windows; the two matched windows (point estimates, no interval); all windows without the largest N. The hours gained per doubling of N on matched windows are reported beside the fit and take precedence over it: saturation is claimed directly only if the last doubling gains less than the margin in every matched window.",
+   "d_n8000": "New runs: N = 8000, 32.5 km, sun 10 deg, windows of 3 August and 7 September 2026 (batch paper2_v156_a19_n8000), release 1.5.6 unchanged (SHA-256 240698a9c52c6f4a17bf16ae489fdea5cba721e0ec0795a9973c1a368b2532b3), every other setting as A17/A18. If a run cannot finish (memory or time), that is reported and the fit is given without N = 8000.",
+   "not_adopted": "N = 4000 in the six other windows was considered and not adopted.",
+   "scope": "Descriptive; no hypothesis decision. Paper 1 and release 1.5.3 are not touched.",
+   "script": {
+    "arf_ecc_cap_replay_a19.py": "c8667060d7642fccaf4e964b2d17483c7d352bce262b61a3c55fb0381aa38d14",
+    "arf_paper2_summary_a19.py": "52e96711f5f0de06813bbff35e469bbf5c40db6039d865e90d5bf75575a4437a",
+    "arf_paper2_runner_a19.py": "006492cb63b79d4b86dbe9eb6d7668a84d0ec5b5ccfce9c8249dd596f0cdfd08",
+    "algorithmic_reconstruction_framework_v156.py": "240698a9c52c6f4a17bf16ae489fdea5cba721e0ec0795a9973c1a368b2532b3",
+    "arf_batch_runner_v154.py": "bb69e27fa5776630915cbe9c7d3e0081ef0203a5365c5471aa86ab293c4ae6e0",
+    "arf_paper2_summary_a18.py": "7ff319cae605eb2922d464f44d710eeaa7cdeb2d45228cf7ca6b6cc4ad1e52a3"
+   }
+  }
+ ]
+}

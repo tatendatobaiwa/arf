@@ -1,0 +1,58 @@
+identity check: 73 onsets: floor, ECC and FCFS equal the run's arf_onset_robustness.csv
+{
+ "run_dir": "2026-01-26",
+ "onsets": 73,
+ "margin_min": 94.49638004584202,
+ "k": 30,
+ "identity_check": "passed",
+ "methods": {
+  "ecc": {
+   "reached_level_pct": 100.0,
+   "within_margin_of_floor_pct": 100.0,
+   "time_h_median": 12.2,
+   "images_mean": 11.67123287671233,
+   "images_median": 13.0
+  },
+  "wang26": {
+   "reached_level_pct": 100.0,
+   "within_margin_of_floor_pct": 100.0,
+   "time_h_median": 12.2,
+   "images_mean": 16.589041095890412,
+   "images_median": 19.0,
+   "coverage_pct_median": 99.81635824268965,
+   "ecc_fewer_images_pct": 100.0,
+   "ecc_not_later_pct": 100.0
+  },
+  "wang26_full": {
+   "reached_level_pct": 100.0,
+   "within_margin_of_floor_pct": 100.0,
+   "time_h_median": 12.2,
+   "images_mean": 18.65753424657534,
+   "images_median": 20.0,
+   "coverage_pct_median": 100.0,
+   "ecc_fewer_images_pct": 100.0,
+   "ecc_not_later_pct": 100.0
+  },
+  "ks17": {
+   "reached_level_pct": 100.0,
+   "within_margin_of_floor_pct": 100.0,
+   "time_h_median": 12.2,
+   "images_mean": 18.397260273972602,
+   "images_median": 19.0,
+   "coverage_pct_median": 99.83048453171352,
+   "ecc_fewer_images_pct": 100.0,
+   "ecc_not_later_pct": 100.0
+  },
+  "pan24": {
+   "reached_level_pct": 100.0,
+   "within_margin_of_floor_pct": 100.0,
+   "time_h_median": 12.2,
+   "images_mean": 11.684931506849315,
+   "images_median": 13.0,
+   "coverage_pct_median": 96.45430145500777,
+   "ecc_fewer_images_pct": 1.36986301369863,
+   "ecc_not_later_pct": 100.0
+  }
+ },
+ "fcfs_images_mean": 19.45205479452055
+}

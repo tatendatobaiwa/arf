@@ -1,0 +1,131 @@
+identity check: 73 onsets equal the run's arf_onset_robustness.csv at zero latency
+{
+ "run_dir": "2026-10-05",
+ "margin_min": 94.13876733291643,
+ "k": 30,
+ "identity_check": "passed",
+ "latency_h": {
+  "zero": [
+   0,
+   0,
+   0
+  ],
+  "fast": [
+   1.6666666666666667,
+   4,
+   2
+  ],
+  "typical": [
+   3,
+   6,
+   6
+  ],
+  "slow": [
+   24,
+   12,
+   24
+  ],
+  "ps2": [
+   3,
+   6,
+   2
+  ],
+  "ps6": [
+   3,
+   6,
+   6
+  ],
+  "ps12": [
+   3,
+   6,
+   12
+  ],
+  "ps24": [
+   3,
+   6,
+   24
+  ]
+ },
+ "scenarios": {
+  "zero": {
+   "evaluable_onsets": 73,
+   "h1a_pct": 100.0,
+   "h1b_eligible": 73,
+   "h1b_pct": 100.0,
+   "floor_h_median": 13.183333333333334,
+   "ecc_images_median": 7.0,
+   "fcfs_images_median": 26.0,
+   "floor_shift_h_median": 0.0
+  },
+  "fast": {
+   "evaluable_onsets": 73,
+   "h1a_pct": 100.0,
+   "h1b_eligible": 73,
+   "h1b_pct": 100.0,
+   "floor_h_median": 15.183333333333334,
+   "ecc_images_median": 7.0,
+   "fcfs_images_median": 16.0,
+   "floor_shift_h_median": 2.0
+  },
+  "typical": {
+   "evaluable_onsets": 73,
+   "h1a_pct": 100.0,
+   "h1b_eligible": 73,
+   "h1b_pct": 100.0,
+   "floor_h_median": 19.183333333333334,
+   "ecc_images_median": 7.0,
+   "fcfs_images_median": 16.0,
+   "floor_shift_h_median": 6.0
+  },
+  "slow": {
+   "evaluable_onsets": 73,
+   "h1a_pct": 100.0,
+   "h1b_eligible": 73,
+   "h1b_pct": 100.0,
+   "floor_h_median": 37.18333333333333,
+   "ecc_images_median": 7.0,
+   "fcfs_images_median": 26.0,
+   "floor_shift_h_median": 24.0
+  },
+  "ps2": {
+   "evaluable_onsets": 73,
+   "h1a_pct": 100.0,
+   "h1b_eligible": 73,
+   "h1b_pct": 100.0,
+   "floor_h_median": 15.183333333333334,
+   "ecc_images_median": 7.0,
+   "fcfs_images_median": 28.0,
+   "floor_shift_h_median": 2.0
+  },
+  "ps6": {
+   "evaluable_onsets": 73,
+   "h1a_pct": 100.0,
+   "h1b_eligible": 73,
+   "h1b_pct": 100.0,
+   "floor_h_median": 19.183333333333334,
+   "ecc_images_median": 7.0,
+   "fcfs_images_median": 16.0,
+   "floor_shift_h_median": 6.0
+  },
+  "ps12": {
+   "evaluable_onsets": 73,
+   "h1a_pct": 100.0,
+   "h1b_eligible": 73,
+   "h1b_pct": 100.0,
+   "floor_h_median": 25.183333333333334,
+   "ecc_images_median": 7.0,
+   "fcfs_images_median": 16.0,
+   "floor_shift_h_median": 12.0
+  },
+  "ps24": {
+   "evaluable_onsets": 73,
+   "h1a_pct": 100.0,
+   "h1b_eligible": 73,
+   "h1b_pct": 100.0,
+   "floor_h_median": 36.85,
+   "ecc_images_median": 7.0,
+   "fcfs_images_median": 16.0,
+   "floor_shift_h_median": 24.0
+  }
+ }
+}

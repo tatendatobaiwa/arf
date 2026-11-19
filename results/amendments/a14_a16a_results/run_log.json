@@ -1,0 +1,174 @@
+{
+ "stamp": "20261110T123452Z",
+ "protocol_sha256": "a7b102cd96ca51d271124d798a4887f5be365633de37c108ec54b1cc260252eb",
+ "windows": [
+  {
+   "season": "dry",
+   "window": "2026-08-03",
+   "run_dir": "/content/drive/MyDrive/ARF_Outputs_ckgr_okavango_earth-resources_planet-conservative_from20260803",
+   "A14": "ok",
+   "A16a": "ok"
+  },
+  {
+   "season": "dry",
+   "window": "2026-08-10",
+   "run_dir": "/content/drive/MyDrive/ARF_Outputs_ckgr_okavango_earth-resources_planet-conservative_from20260810",
+   "A14": "ok",
+   "A16a": "ok"
+  },
+  {
+   "season": "dry",
+   "window": "2026-08-17",
+   "run_dir": "/content/drive/MyDrive/ARF_Outputs_ckgr_okavango_earth-resources_planet-conservative_from20260817",
+   "A14": "ok",
+   "A16a": "ok"
+  },
+  {
+   "season": "dry",
+   "window": "2026-08-24",
+   "run_dir": "/content/drive/MyDrive/ARF_Outputs_ckgr_okavango_earth-resources_planet-conservative_from20260824",
+   "A14": "ok",
+   "A16a": "ok"
+  },
+  {
+   "season": "dry",
+   "window": "2026-08-31",
+   "run_dir": "/content/drive/MyDrive/ARF_Outputs_ckgr_okavango_earth-resources_planet-conservative_from20260831",
+   "A14": "ok",
+   "A16a": "ok"
+  },
+  {
+   "season": "dry",
+   "window": "2026-09-07",
+   "run_dir": "/content/drive/MyDrive/ARF_Outputs_ckgr_okavango_earth-resources_planet-conservative_from20260907",
+   "A14": "ok",
+   "A16a": "ok"
+  },
+  {
+   "season": "dry",
+   "window": "2026-09-14",
+   "run_dir": "/content/drive/MyDrive/ARF_Outputs_ckgr_okavango_earth-resources_planet-conservative_from20260914",
+   "A14": "ok",
+   "A16a": "ok"
+  },
+  {
+   "season": "dry",
+   "window": "2026-09-21",
+   "run_dir": "/content/drive/MyDrive/ARF_Outputs_ckgr_okavango_earth-resources_planet-conservative_from20260921",
+   "A14": "ok",
+   "A16a": "ok"
+  },
+  {
+   "season": "wet",
+   "window": "2026-01-05",
+   "run_dir": "/content/drive/MyDrive/ARF_wetseason_A5/p035/2026-01-05",
+   "A14": "ok",
+   "A16a": "ok"
+  },
+  {
+   "season": "wet",
+   "window": "2026-01-12",
+   "run_dir": "/content/drive/MyDrive/ARF_wetseason_A5/p035/2026-01-12",
+   "A14": "ok",
+   "A16a": "ok"
+  },
+  {
+   "season": "wet",
+   "window": "2026-01-19",
+   "run_dir": "/content/drive/MyDrive/ARF_wetseason_A5/p035/2026-01-19",
+   "A14": "ok",
+   "A16a": "ok"
+  },
+  {
+   "season": "wet",
+   "window": "2026-01-26",
+   "run_dir": "/content/drive/MyDrive/ARF_wetseason_A5/p035/2026-01-26",
+   "A14": "ok",
+   "A16a": "ok"
+  },
+  {
+   "season": "wet",
+   "window": "2026-02-02",
+   "run_dir": "/content/drive/MyDrive/ARF_wetseason_A5/p035/2026-02-02",
+   "A14": "ok",
+   "A16a": "ok"
+  },
+  {
+   "season": "wet",
+   "window": "2026-02-09",
+   "run_dir": "/content/drive/MyDrive/ARF_wetseason_A5/p035/2026-02-09",
+   "A14": "ok",
+   "A16a": "ok"
+  },
+  {
+   "season": "wet",
+   "window": "2026-02-16",
+   "run_dir": "/content/drive/MyDrive/ARF_wetseason_A5/p035/2026-02-16",
+   "A14": "ok",
+   "A16a": "ok"
+  },
+  {
+   "season": "wet",
+   "window": "2026-02-23",
+   "run_dir": "/content/drive/MyDrive/ARF_wetseason_A5/p035/2026-02-23",
+   "A14": "ok",
+   "A16a": "ok"
+  },
+  {
+   "season": "dry_added",
+   "window": "2026-07-06",
+   "run_dir": "/content/drive/MyDrive/ARF_dryext_A15/p035/2026-07-06",
+   "A14": "ok",
+   "A16a": "ok"
+  },
+  {
+   "season": "dry_added",
+   "window": "2026-07-13",
+   "run_dir": "/content/drive/MyDrive/ARF_dryext_A15/p035/2026-07-13",
+   "A14": "ok",
+   "A16a": "ok"
+  },
+  {
+   "season": "dry_added",
+   "window": "2026-07-20",
+   "run_dir": "/content/drive/MyDrive/ARF_dryext_A15/p035/2026-07-20",
+   "A14": "ok",
+   "A16a": "ok"
+  },
+  {
+   "season": "dry_added",
+   "window": "2026-07-27",
+   "run_dir": "/content/drive/MyDrive/ARF_dryext_A15/p035/2026-07-27",
+   "A14": "ok",
+   "A16a": "ok"
+  },
+  {
+   "season": "dry_added",
+   "window": "2026-09-28",
+   "run_dir": "/content/drive/MyDrive/ARF_dryext_A15/p035/2026-09-28",
+   "A14": "ok",
+   "A16a": "ok"
+  },
+  {
+   "season": "dry_added",
+   "window": "2026-10-05",
+   "run_dir": "/content/drive/MyDrive/ARF_dryext_A15/p035/2026-10-05",
+   "A14": "ok",
+   "A16a": "ok"
+  },
+  {
+   "season": "dry_added",
+   "window": "2026-10-12",
+   "run_dir": "/content/drive/MyDrive/ARF_dryext_A15/p035/2026-10-12",
+   "A14": "ok",
+   "A16a": "ok"
+  },
+  {
+   "season": "dry_added",
+   "window": "2026-10-19",
+   "run_dir": "/content/drive/MyDrive/ARF_dryext_A15/p035/2026-10-19",
+   "A14": "ok",
+   "A16a": "ok"
+  }
+ ]
+}

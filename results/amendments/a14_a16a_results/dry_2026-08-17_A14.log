@@ -1,0 +1,58 @@
+identity check: 73 onsets: floor, ECC and FCFS equal the run's arf_onset_robustness.csv
+{
+ "run_dir": "ARF_Outputs_ckgr_okavango_earth-resources_planet-conservative_from20260817",
+ "onsets": 73,
+ "margin_min": 94.24762742387773,
+ "k": 30,
+ "identity_check": "passed",
+ "methods": {
+  "ecc": {
+   "reached_level_pct": 100.0,
+   "within_margin_of_floor_pct": 100.0,
+   "time_h_median": 12.783333333333333,
+   "images_mean": 10.068493150684931,
+   "images_median": 12.0
+  },
+  "wang26": {
+   "reached_level_pct": 100.0,
+   "within_margin_of_floor_pct": 100.0,
+   "time_h_median": 12.783333333333333,
+   "images_mean": 11.849315068493151,
+   "images_median": 13.0,
+   "coverage_pct_median": 95.36778398510242,
+   "ecc_fewer_images_pct": 100.0,
+   "ecc_not_later_pct": 100.0
+  },
+  "wang26_full": {
+   "reached_level_pct": 100.0,
+   "within_margin_of_floor_pct": 100.0,
+   "time_h_median": 12.816666666666666,
+   "images_mean": 13.095890410958905,
+   "images_median": 15.0,
+   "coverage_pct_median": 100.0,
+   "ecc_fewer_images_pct": 100.0,
+   "ecc_not_later_pct": 100.0
+  },
+  "ks17": {
+   "reached_level_pct": 100.0,
+   "within_margin_of_floor_pct": 100.0,
+   "time_h_median": 12.783333333333333,
+   "images_mean": 14.054794520547945,
+   "images_median": 16.0,
+   "coverage_pct_median": 100.0,
+   "ecc_fewer_images_pct": 100.0,
+   "ecc_not_later_pct": 100.0
+  },
+  "pan24": {
+   "reached_level_pct": 100.0,
+   "within_margin_of_floor_pct": 100.0,
+   "time_h_median": 12.783333333333333,
+   "images_mean": 10.04109589041096,
+   "images_median": 12.0,
+   "coverage_pct_median": 95.19320297951583,
+   "ecc_fewer_images_pct": 0.0,
+   "ecc_not_later_pct": 100.0
+  }
+ },
+ "fcfs_images_mean": 13.904109589041095
+}

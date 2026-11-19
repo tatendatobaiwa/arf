@@ -1,0 +1,13 @@
+PASS A19 protocol installed, A18 inside it
+PASS A18 protocol kept byte for byte
+PASS A19 replay, runner and summary in ARF_code
+PASS every A18 file and the A17 protocol unchanged
+PASS rerun: nothing changed
+PASS replay: 4 runs, identity check passed in each
+PASS summary: replay table filled from the replay's own output
+PASS the narrow run needs 132 images without a cap and completes at k = 30 in 0% of onsets
+PASS fit and tables written
+PASS a different file in ARF_code is refused
+PASS a protocol ending at A17 is refused
+PASS a changed release 1.5.3 is refused
+12/12 passed

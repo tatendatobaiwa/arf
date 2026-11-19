@@ -1,0 +1,15 @@
+PASS 88 runs read; floors equal the uploaded a18_runs.csv
+PASS real data, N >= 500: T_inf 2.37 h, b 1.05 (independent computation: 2.37, 1.05)
+PASS bootstrap interval of T_inf 1.51 to 2.95 h (independent: 1.51 to 2.96)
+PASS matched windows 1.99 h; without N = 4000 2.36 h
+PASS matched gains 2000 to 4000: 1.13 and 1.35 h; direct statement: no saturation shown
+PASS runs without N = 8000 and without the replay, and says so
+PASS every run in the fit has the region reachable
+PASS known curve: T_inf 2.50 (2.5), b 0.99 (1), N*_1h 4033 (4000); N = 8000 read
+PASS bootstrap interval contains the true limit
+PASS direct statement follows the last doubling (0.5 h gained from 4000 to 8000: below 1 h, not below 0.5 h)
+PASS replay summaries read into the table by camera and N
+PASS all output files written
+PASS both tables compile without overfull boxes; enclosed grids, no booktabs
+PASS a protocol without A19 is refused
+14/14 passed

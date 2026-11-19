@@ -1,0 +1,49 @@
+{
+ "run_dir": "ARF_Outputs_ckgr_okavango_N20_from20260831_sun10_sw32.5km",
+ "onsets": 73,
+ "evaluable": 73,
+ "margin_min": 93.87193203738686,
+ "identity_check": "passed",
+ "images": 8,
+ "images_with_repeated_cells": 0,
+ "floor_h_median": 16.616666666666667,
+ "fcfs_images_mean": 4.068493150684931,
+ "caps": {
+  "k30": {
+   "completes_pct": 100.0,
+   "within_margin_of_floor_pct": 100.0,
+   "delay_over_floor_min_median": 0.0,
+   "images_mean": 3.2054794520547945,
+   "images_max": 5,
+   "fewer_images_than_fcfs_pct": 86.3013698630137,
+   "more_images_than_fcfs_pct": 0.0
+  },
+  "k60": {
+   "completes_pct": 100.0,
+   "within_margin_of_floor_pct": 100.0,
+   "delay_over_floor_min_median": 0.0,
+   "images_mean": 3.2054794520547945,
+   "images_max": 5,
+   "fewer_images_than_fcfs_pct": 86.3013698630137,
+   "more_images_than_fcfs_pct": 0.0
+  },
+  "k120": {
+   "completes_pct": 100.0,
+   "within_margin_of_floor_pct": 100.0,
+   "delay_over_floor_min_median": 0.0,
+   "images_mean": 3.2054794520547945,
+   "images_max": 5,
+   "fewer_images_than_fcfs_pct": 86.3013698630137,
+   "more_images_than_fcfs_pct": 0.0
+  },
+  "nocap": {
+   "completes_pct": 100.0,
+   "within_margin_of_floor_pct": 100.0,
+   "delay_over_floor_min_median": 0.0,
+   "images_mean": 3.2054794520547945,
+   "images_max": 5,
+   "fewer_images_than_fcfs_pct": 86.3013698630137,
+   "more_images_than_fcfs_pct": 0.0
+  }
+ }
+}

@@ -1,0 +1,62 @@
+[0.002s][warning][os,container] Cgroup memory controller path at '/sys/fs/cgroup' seems to have moved to '/../../jupyter-children', detected limits won't be accurate
+[0.002s][warning][os,container] Cgroup cpu controller path at '/sys/fs/cgroup' seems to have moved to '/../../jupyter-children', detected limits won't be accurate
+
+[1/58] ARF_Outputs_ckgr_okavango_N5_from20260803_sun10_sw32.5km_v156: agrees: 5 satellites | port vs registered 1.5.6: IDENTICAL | vs the run's files: access identical, downlink identical, refined identical, summaries equal | 10 s
+[2/58] ARF_Outputs_ckgr_okavango_N20_from20260803_sun10_sw32.5km_v156: agrees: 20 satellites | port vs registered 1.5.6: IDENTICAL | vs the run's files: access identical, downlink identical, refined identical, summaries equal | 11 s
+[3/58] ARF_Outputs_ckgr_okavango_N100_from20260803_sun10_sw32.5km: agrees: 100 satellites | port vs registered 1.5.6: IDENTICAL | vs the run's files: access identical, downlink identical, refined identical, summaries equal | 53 s
+[4/58] ARF_Outputs_ckgr_okavango_N250_from20260803_sun10_sw32.5km: agrees: 250 satellites | port vs registered 1.5.6: IDENTICAL | vs the run's files: access identical, downlink identical, refined identical, summaries equal | 131 s
+[5/58] ARF_Outputs_ckgr_okavango_N500_from20260803_sun10_sw32.5km: skipped: 500 satellites, more than --max-satellites 250
+[6/58] ARF_Outputs_ckgr_okavango_N1000_from20260803_sun10_sw32.5km: skipped: 1000 satellites, more than --max-satellites 250
+[7/58] ARF_Outputs_ckgr_okavango_N5_from20260810_sun10_sw32.5km: agrees: 5 satellites | port vs registered 1.5.6: IDENTICAL | vs the run's files: access identical, downlink identical, refined identical, summaries equal | 6 s
+[8/58] ARF_Outputs_ckgr_okavango_N20_from20260810_sun10_sw32.5km: agrees: 20 satellites | port vs registered 1.5.6: IDENTICAL | vs the run's files: access identical, downlink identical, refined identical, summaries equal | 12 s
+[9/58] ARF_Outputs_ckgr_okavango_N100_from20260810_sun10_sw32.5km: agrees: 100 satellites | port vs registered 1.5.6: IDENTICAL | vs the run's files: access identical, downlink identical, refined identical, summaries equal | 53 s
+[10/58] ARF_Outputs_ckgr_okavango_N250_from20260810_sun10_sw32.5km: agrees: 250 satellites | port vs registered 1.5.6: IDENTICAL | vs the run's files: access identical, downlink identical, refined identical, summaries equal | 134 s
+[11/58] ARF_Outputs_ckgr_okavango_N500_from20260810_sun10_sw32.5km: skipped: 500 satellites, more than --max-satellites 250
+[12/58] ARF_Outputs_ckgr_okavango_N1000_from20260810_sun10_sw32.5km: skipped: 1000 satellites, more than --max-satellites 250
+[13/58] ARF_Outputs_ckgr_okavango_N5_from20260817_sun10_sw32.5km: agrees: 5 satellites | port vs registered 1.5.6: IDENTICAL | vs the run's files: access identical, downlink identical, refined identical, summaries equal | 4 s
+[14/58] ARF_Outputs_ckgr_okavango_N20_from20260817_sun10_sw32.5km: agrees: 20 satellites | port vs registered 1.5.6: IDENTICAL | vs the run's files: access identical, downlink identical, refined identical, summaries equal | 12 s
+[15/58] ARF_Outputs_ckgr_okavango_N100_from20260817_sun10_sw32.5km: agrees: 100 satellites | port vs registered 1.5.6: IDENTICAL | vs the run's files: access identical, downlink identical, refined identical, summaries equal | 50 s
+[16/58] ARF_Outputs_ckgr_okavango_N250_from20260817_sun10_sw32.5km: agrees: 250 satellites | port vs registered 1.5.6: IDENTICAL | vs the run's files: access identical, downlink identical, refined identical, summaries equal | 124 s
+[17/58] ARF_Outputs_ckgr_okavango_N500_from20260817_sun10_sw32.5km: skipped: 500 satellites, more than --max-satellites 250
+[18/58] ARF_Outputs_ckgr_okavango_N1000_from20260817_sun10_sw32.5km: skipped: 1000 satellites, more than --max-satellites 250
+[19/58] ARF_Outputs_ckgr_okavango_N5_from20260824_sun10_sw32.5km: agrees: 5 satellites | port vs registered 1.5.6: IDENTICAL | vs the run's files: access identical, downlink identical, refined identical, summaries equal | 6 s
+[20/58] ARF_Outputs_ckgr_okavango_N20_from20260824_sun10_sw32.5km: agrees: 20 satellites | port vs registered 1.5.6: IDENTICAL | vs the run's files: access identical, downlink identical, refined identical, summaries equal | 13 s
+[21/58] ARF_Outputs_ckgr_okavango_N100_from20260824_sun10_sw32.5km: agrees: 100 satellites | port vs registered 1.5.6: IDENTICAL | vs the run's files: access identical, downlink identical, refined identical, summaries equal | 50 s
+[22/58] ARF_Outputs_ckgr_okavango_N250_from20260824_sun10_sw32.5km: agrees: 250 satellites | port vs registered 1.5.6: IDENTICAL | vs the run's files: access identical, downlink identical, refined identical, summaries equal | 124 s
+[23/58] ARF_Outputs_ckgr_okavango_N500_from20260824_sun10_sw32.5km: skipped: 500 satellites, more than --max-satellites 250
+[24/58] ARF_Outputs_ckgr_okavango_N1000_from20260824_sun10_sw32.5km: skipped: 1000 satellites, more than --max-satellites 250
+[25/58] ARF_Outputs_ckgr_okavango_N5_from20260831_sun10_sw32.5km: agrees: 5 satellites | port vs registered 1.5.6: IDENTICAL | vs the run's files: access identical, downlink identical, refined identical, summaries equal | 4 s
+[26/58] ARF_Outputs_ckgr_okavango_N20_from20260831_sun10_sw32.5km: agrees: 20 satellites | port vs registered 1.5.6: IDENTICAL | vs the run's files: access identical, downlink identical, refined identical, summaries equal | 11 s
+[27/58] ARF_Outputs_ckgr_okavango_N100_from20260831_sun10_sw32.5km: agrees: 100 satellites | port vs registered 1.5.6: IDENTICAL | vs the run's files: access identical, downlink identical, refined identical, summaries equal | 52 s
+[28/58] ARF_Outputs_ckgr_okavango_N250_from20260831_sun10_sw32.5km: agrees: 250 satellites | port vs registered 1.5.6: IDENTICAL | vs the run's files: access identical, downlink identical, refined identical, summaries equal | 129 s
+[29/58] ARF_Outputs_ckgr_okavango_N500_from20260831_sun10_sw32.5km: skipped: 500 satellites, more than --max-satellites 250
+[30/58] ARF_Outputs_ckgr_okavango_N1000_from20260831_sun10_sw32.5km: skipped: 1000 satellites, more than --max-satellites 250
+[31/58] ARF_Outputs_ckgr_okavango_N5_from20260907_sun10_sw32.5km: agrees: 5 satellites | port vs registered 1.5.6: IDENTICAL | vs the run's files: access identical, downlink identical, refined identical, summaries equal | 4 s
+[32/58] ARF_Outputs_ckgr_okavango_N20_from20260907_sun10_sw32.5km: agrees: 20 satellites | port vs registered 1.5.6: IDENTICAL | vs the run's files: access identical, downlink identical, refined identical, summaries equal | 13 s
+[33/58] ARF_Outputs_ckgr_okavango_N100_from20260907_sun10_sw32.5km: agrees: 100 satellites | port vs registered 1.5.6: IDENTICAL | vs the run's files: access identical, downlink identical, refined identical, summaries equal | 55 s
+[34/58] ARF_Outputs_ckgr_okavango_N250_from20260907_sun10_sw32.5km: agrees: 250 satellites | port vs registered 1.5.6: IDENTICAL | vs the run's files: access identical, downlink identical, refined identical, summaries equal | 129 s
+[35/58] ARF_Outputs_ckgr_okavango_N500_from20260907_sun10_sw32.5km: skipped: 500 satellites, more than --max-satellites 250
+[36/58] ARF_Outputs_ckgr_okavango_N1000_from20260907_sun10_sw32.5km: skipped: 1000 satellites, more than --max-satellites 250
+[37/58] ARF_Outputs_ckgr_okavango_N5_from20260914_sun10_sw32.5km: agrees: 5 satellites | port vs registered 1.5.6: IDENTICAL | vs the run's files: access identical, downlink identical, refined identical, summaries equal | 5 s
+[38/58] ARF_Outputs_ckgr_okavango_N20_from20260914_sun10_sw32.5km: agrees: 20 satellites | port vs registered 1.5.6: IDENTICAL | vs the run's files: access identical, downlink identical, refined identical, summaries equal | 10 s
+[39/58] ARF_Outputs_ckgr_okavango_N100_from20260914_sun10_sw32.5km: agrees: 100 satellites | port vs registered 1.5.6: IDENTICAL | vs the run's files: access identical, downlink identical, refined identical, summaries equal | 53 s
+[40/58] ARF_Outputs_ckgr_okavango_N250_from20260914_sun10_sw32.5km: agrees: 250 satellites | port vs registered 1.5.6: IDENTICAL | vs the run's files: access identical, downlink identical, refined identical, summaries equal | 126 s
+[41/58] ARF_Outputs_ckgr_okavango_N500_from20260914_sun10_sw32.5km: skipped: 500 satellites, more than --max-satellites 250
+[42/58] ARF_Outputs_ckgr_okavango_N1000_from20260914_sun10_sw32.5km: skipped: 1000 satellites, more than --max-satellites 250
+[43/58] ARF_Outputs_ckgr_okavango_N5_from20260921_sun10_sw32.5km: agrees: 5 satellites | port vs registered 1.5.6: IDENTICAL | vs the run's files: access identical, downlink identical, refined identical, summaries equal | 4 s
+[44/58] ARF_Outputs_ckgr_okavango_N20_from20260921_sun10_sw32.5km: agrees: 20 satellites | port vs registered 1.5.6: IDENTICAL | vs the run's files: access identical, downlink identical, refined identical, summaries equal | 13 s
+[45/58] ARF_Outputs_ckgr_okavango_N100_from20260921_sun10_sw32.5km: agrees: 100 satellites | port vs registered 1.5.6: IDENTICAL | vs the run's files: access identical, downlink identical, refined identical, summaries equal | 56 s
+[46/58] ARF_Outputs_ckgr_okavango_N250_from20260921_sun10_sw32.5km: agrees: 250 satellites | port vs registered 1.5.6: IDENTICAL | vs the run's files: access identical, downlink identical, refined identical, summaries equal | 129 s
+[47/58] ARF_Outputs_ckgr_okavango_N500_from20260921_sun10_sw32.5km: skipped: 500 satellites, more than --max-satellites 250
+[48/58] ARF_Outputs_ckgr_okavango_N1000_from20260921_sun10_sw32.5km: skipped: 1000 satellites, more than --max-satellites 250
+[49/58] ARF_Outputs_ckgr_okavango_N2000_from20260803_sun10_sw32.5km: skipped: 2000 satellites, more than --max-satellites 250
+[50/58] ARF_Outputs_ckgr_okavango_N2000_from20260810_sun10_sw32.5km: skipped: 2000 satellites, more than --max-satellites 250
+[51/58] ARF_Outputs_ckgr_okavango_N2000_from20260817_sun10_sw32.5km: skipped: 2000 satellites, more than --max-satellites 250
+[52/58] ARF_Outputs_ckgr_okavango_N2000_from20260824_sun10_sw32.5km: skipped: 2000 satellites, more than --max-satellites 250
+[53/58] ARF_Outputs_ckgr_okavango_N2000_from20260831_sun10_sw32.5km: skipped: 2000 satellites, more than --max-satellites 250
+[54/58] ARF_Outputs_ckgr_okavango_N2000_from20260907_sun10_sw32.5km: skipped: 2000 satellites, more than --max-satellites 250
+[55/58] ARF_Outputs_ckgr_okavango_N2000_from20260914_sun10_sw32.5km: skipped: 2000 satellites, more than --max-satellites 250
+[56/58] ARF_Outputs_ckgr_okavango_N2000_from20260921_sun10_sw32.5km: skipped: 2000 satellites, more than --max-satellites 250
+[57/58] ARF_Outputs_ckgr_okavango_N4000_from20260803_sun10_sw32.5km: skipped: 4000 satellites, more than --max-satellites 250
+[58/58] ARF_Outputs_ckgr_okavango_N4000_from20260907_sun10_sw32.5km: skipped: 4000 satellites, more than --max-satellites 250
+32 of 32 runs checked agree; port differs in 0, run not reproduced in 0, errors in 0; 26 skipped

@@ -1,0 +1,67 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "arf"
+dynamic = ["version"]
+description = "Algorithmic Reconstruction Framework: selection of satellite images, before acquisition, for the earliest mosaic of a large region."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [{ name = "Tatenda Allen Tobaiwa" }]
+dependencies = ["numpy>=1.26", "pandas>=2.1", "scipy>=1.11"]
+
+[project.optional-dependencies]
+grid = ["h3==4.5.0"]
+# Reading WDPA shapefiles (pyshp, the version the registered releases were validated with) and corridor regions.
+boundaries = ["h3==4.5.0", "pyshp==3.1.6", "shapely>=2.0"]
+# Orbit propagation (the versions the registered releases were validated with). Orekit also needs its data files:
+# pip install git+https://gitlab.orekit.org/orekit/orekit-data.git
+orekit = ["orekit-jpype==13.1.9.0", "jdk4py==25.0.2.1"]
+dev = [
+    "pytest>=8",
+    "ruff>=0.6",
+    "h3==4.5.0",
+    "pyshp==3.1.6",
+    "shapely>=2.0",
+    "matplotlib>=3.8",
+    "orekit-jpype==13.1.9.0",
+    "jdk4py==25.0.2.1",
+]
+
+[tool.setuptools.dynamic]
+version = { attr = "arf.__version__" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+# pytest's faulthandler plugin installs handlers for SIGSEGV and related signals. The Java machine that runs Orekit uses
+# those signals itself, and when the process ends the two collide: every test passes and the process then exits with
+# a segmentation fault (status 139). A real crash still ends the run with a non-zero status, only without a Python
+# traceback.
+addopts = "-p no:faulthandler"
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+# Release 2 only. The folders below hold the registered research releases and analysis scripts.
+# Their SHA-256 hashes are recorded in protocol/arf_confirmatory_protocol.json, so they are never
+# reformatted or edited (see CONTRIBUTING.md).
+include = ["src/**/*.py", "tests/unit/**/*.py", "tests/parity/**/*.py", "tools/**/*.py"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "D", "UP", "B", "C90", "SIM", "RUF"]
+ignore = ["D203", "D213"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.mccabe]
+max-complexity = 12
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["D103", "D100"]

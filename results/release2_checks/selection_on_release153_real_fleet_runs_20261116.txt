@@ -1,0 +1,17 @@
+[1/16] ARF_Outputs_ckgr_okavango_earth-resources_planet-conservative_from20260803: 73 onsets agree
+[2/16] ARF_Outputs_ckgr_okavango_earth-resources_planet-conservative_from20260803_without-SENTINEL2A: 73 onsets agree
+[3/16] ARF_Outputs_ckgr_okavango_earth-resources_planet-conservative_from20260810: 73 onsets agree
+[4/16] ARF_Outputs_ckgr_okavango_earth-resources_planet-conservative_from20260810_without-SENTINEL2A: 73 onsets agree
+[5/16] ARF_Outputs_ckgr_okavango_earth-resources_planet-conservative_from20260817: 73 onsets agree
+[6/16] ARF_Outputs_ckgr_okavango_earth-resources_planet-conservative_from20260817_without-SENTINEL2A: 73 onsets agree
+[7/16] ARF_Outputs_ckgr_okavango_earth-resources_planet-conservative_from20260824: 73 onsets agree
+[8/16] ARF_Outputs_ckgr_okavango_earth-resources_planet-conservative_from20260824_without-SENTINEL2A: 73 onsets agree
+[9/16] ARF_Outputs_ckgr_okavango_earth-resources_planet-conservative_from20260831: 73 onsets agree
+[10/16] ARF_Outputs_ckgr_okavango_earth-resources_planet-conservative_from20260831_without-SENTINEL2A: 73 onsets agree
+[11/16] ARF_Outputs_ckgr_okavango_earth-resources_planet-conservative_from20260907: 73 onsets agree
+[12/16] ARF_Outputs_ckgr_okavango_earth-resources_planet-conservative_from20260907_without-SENTINEL2A: 73 onsets agree
+[13/16] ARF_Outputs_ckgr_okavango_earth-resources_planet-conservative_from20260914: 73 onsets agree
+[14/16] ARF_Outputs_ckgr_okavango_earth-resources_planet-conservative_from20260914_without-SENTINEL2A: 73 onsets agree
+[15/16] ARF_Outputs_ckgr_okavango_earth-resources_planet-conservative_from20260921: 73 onsets agree
+[16/16] ARF_Outputs_ckgr_okavango_earth-resources_planet-conservative_from20260921_without-SENTINEL2A: 73 onsets agree
+16 of 16 runs agree with the registered release

@@ -1,0 +1,37 @@
+ARF release 1.5.6 (10 November 2026): Alpha-5 catalogue numbers in the Starlink proxy
+======================================================================================
+Status: the release used for every reported dense-constellation run (amendments A18 and A19).
+Release 1.5.3 remains the release of record for Paper 1 and is not affected (see "Real fleets").
+
+Why
+  Catalogue numbers of 100000 and above are written in the 5-character TLE field as Alpha-5: a leading
+  capital letter, A = 10 to Z = 33, with I and O omitted, so 339999 => Z9999 (Space-Track documentation,
+  section "Alpha-5", https://www.space-track.org/documentation, read 10 November 2026). Release 1.5.5 read
+  the field as an integer and so rejected, as "malformed", every Starlink satellite that carries such a
+  number: 104 of 10,881 element sets on 3 August 2026, rising to 424 of 11,133 on 21 September 2026
+  (counted read-only in the cached Space-Track files with the parsing steps of 1.5.5). The proxy samples
+  were therefore drawn from the older satellites only, a bias growing across the eight windows.
+  Found in the A17 smoke stage, before any core run. The two 1.5.5 smoke runs are not reported.
+
+What 1.5.6 changes (Cell 2 only; SHA-256 240698a9c52c6f4a17bf16ae489fdea5cba721e0ec0795a9973c1a368b2532b3)
+  _alpha5_to_int, _parse_norad_id   Alpha-5 decoded
+  select_operational_sample         uses it; nothing else in the filter changes
+  pin files                         named _opsample_a5_seed<seed>, so that no 1.5.5 pin is reused
+  version strings
+  Orekit 13.1.9 already decodes Alpha-5 in TLE(line1, line2); no change was needed there.
+
+Real fleets
+  Their catalogue numbers are read from the OMM field NORAD_CAT_ID, not from the TLE line, in release
+  1.5.3 as in 1.5.6. No Paper 1 result depends on the corrected lines.
+
+Tested
+  In this repository (tests/test_repository.py, no Orekit needed): the decoding against Space-Track's
+  examples and the I/O gaps; 1.5.5 rejects and 1.5.6 accepts the same records; identical selection on
+  5-digit records; own pin-file name.
+  On 10 November 2026, in a sandbox with real Orekit and synthetic Starlink-like orbits numbered from 99000
+  (9,085 of 10,084 Alpha-5): all 24 letters decoded as Orekit decodes them; 1.5.5 rejected all 9,085 and
+  1.5.6 none; Cells 0 to 9 ran without error at N = 20 and N = 100 (16 and 88 Alpha-5 satellites in the
+  fleet). The logs of that session were not kept and are not in the repository.
+  In Colab on real element sets (A18 smoke, 10 November 2026): 0 malformed in every window; operational
+  satellites on 3 August 10,803 of 10,881 (1.5.5: 10,723), of the 104 formerly rejected 80 operational and
+  24 excluded for low perigee.

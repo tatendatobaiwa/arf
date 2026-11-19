@@ -1,0 +1,13 @@
+PASS stage n8000: N = 8000, 32.5 km, sun 10 deg, 3 August and 7 September
+PASS identical to the A18 N = 4000 runs except for N
+PASS run identifiers differ from every A18 run
+PASS both runs done: ['ARF_Outputs_ckgr_okavango_N8000_from20260803_sun10_sw32.5km', 'ARF_Outputs_ckgr_okavango_N8000_from20260907_sun10_sw32.5km']
+PASS index paper2_v156_a19_n8000_index.csv written
+PASS resumable: second call skips both
+PASS a pipeline other than the pinned one is refused
+PASS a changed batch runner is refused
+PASS a protocol without A19 is refused
+PASS a run writing to a folder without its tags stops the batch
+PASS a run that fails on memory is recorded as an error, not as done
+PASS and is run again on the next call
+12/12 passed

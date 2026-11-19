@@ -1,0 +1,57 @@
+{
+ "run_dir": "ARF_Outputs_ckgr_okavango_earth-resources_planet-conservative_from20260810",
+ "onsets": 73,
+ "margin_min": 94.25826297013835,
+ "k": 30,
+ "identity_check": "passed",
+ "methods": {
+  "ecc": {
+   "reached_level_pct": 100.0,
+   "within_margin_of_floor_pct": 100.0,
+   "time_h_median": 12.8,
+   "images_mean": 12.356164383561644,
+   "images_median": 9.0
+  },
+  "wang26": {
+   "reached_level_pct": 100.0,
+   "within_margin_of_floor_pct": 100.0,
+   "time_h_median": 12.8,
+   "images_mean": 16.301369863013697,
+   "images_median": 14.0,
+   "coverage_pct_median": 97.50886075949367,
+   "ecc_fewer_images_pct": 100.0,
+   "ecc_not_later_pct": 100.0
+  },
+  "wang26_full": {
+   "reached_level_pct": 100.0,
+   "within_margin_of_floor_pct": 100.0,
+   "time_h_median": 12.8,
+   "images_mean": 18.397260273972602,
+   "images_median": 15.0,
+   "coverage_pct_median": 100.0,
+   "ecc_fewer_images_pct": 100.0,
+   "ecc_not_later_pct": 100.0
+  },
+  "ks17": {
+   "reached_level_pct": 100.0,
+   "within_margin_of_floor_pct": 100.0,
+   "time_h_median": 12.8,
+   "images_mean": 18.945205479452056,
+   "images_median": 17.0,
+   "coverage_pct_median": 99.61518987341772,
+   "ecc_fewer_images_pct": 100.0,
+   "ecc_not_later_pct": 100.0
+  },
+  "pan24": {
+   "reached_level_pct": 100.0,
+   "within_margin_of_floor_pct": 100.0,
+   "time_h_median": 12.8,
+   "images_mean": 12.32876712328767,
+   "images_median": 9.0,
+   "coverage_pct_median": 95.14936708860759,
+   "ecc_fewer_images_pct": 1.36986301369863,
+   "ecc_not_later_pct": 100.0
+  }
+ },
+ "fcfs_images_mean": 23.19178082191781
+}

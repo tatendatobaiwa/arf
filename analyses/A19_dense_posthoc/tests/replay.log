@@ -1,0 +1,14 @@
+PASS k = 30: floor, FCFS, ECC time and ECC images equal A14 at every onset
+PASS k = 60: floor, FCFS, ECC time and ECC images equal A14 at every onset
+PASS k = 120: floor, FCFS, ECC time and ECC images equal A14 at every onset
+PASS no cap: floor, FCFS, ECC time and ECC images equal A14 at every onset
+PASS 365 onsets compared in 5 synthetic runs
+PASS 202 onsets need more than 30 images without a cap (the cap binds in the test data)
+PASS without a cap ECC completes at the floor (79 onsets of runs without repeated cells)
+PASS a larger cap is never later
+PASS --all: the three finished 1.5.6 runs replayed; the 1.5.5 run and the failed run left out
+PASS identity check passed; no-cap ECC completes at every evaluable onset
+PASS repeated cells inside an image are counted and reported per run
+PASS --all is resumable
+PASS one changed value in the run's onset file stops the replay
+13/13 passed

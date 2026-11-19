@@ -1,0 +1,41 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install
+        run: pip install -e ".[dev]"
+      - name: Lint (release 2 only; registered files are never reformatted)
+        run: ruff check . && ruff format --check .
+      - name: Orekit data (leap seconds, Earth orientation, ITRF versions) from Orekit's own repository
+        # Only the files the access computation reads; the repository also holds large ephemerides it does not need.
+        run: |
+          for attempt in 1 2 3; do
+            rm -rf "$RUNNER_TEMP/orekit-data"
+            git clone --quiet --depth 1 --filter=blob:none --sparse \
+              https://gitlab.orekit.org/orekit/orekit-data.git "$RUNNER_TEMP/orekit-data" && break
+            sleep 20
+          done
+          cd "$RUNNER_TEMP/orekit-data"
+          git sparse-checkout set --no-cone /tai-utc.dat /itrf-versions.conf '/Earth-Orientation-Parameters/IAU-2000/*'
+          test -s tai-utc.dat && test -s Earth-Orientation-Parameters/IAU-2000/finals2000A.all
+          echo "orekit-data commit $(git rev-parse HEAD)"
+          echo "ARF_OREKIT_DATA=$RUNNER_TEMP/orekit-data" >> "$GITHUB_ENV"
+      - name: Tests
+        run: |
+          echo "Orekit data for the parity tests: $ARF_OREKIT_DATA"
+          test -d "$ARF_OREKIT_DATA"
+          python -m pytest -q tests
